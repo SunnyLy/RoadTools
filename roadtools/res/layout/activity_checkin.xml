@@ -1,0 +1,230 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f4f4f4" >
+
+    <Button
+        android:id="@+id/take_btn"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/cab_background_top_holo_dark"
+        android:drawableRight="@drawable/device_access_camera64"
+        android:onClick="mOnClick" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="签到"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="#cc002e3e"
+            android:onClick="mOnClick"
+            android:text="关闭"
+            android:textColor="#f4f4f4"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="#33b5e5" />
+
+        <Button
+            android:id="@+id/start_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="#cc002e3e"
+            android:onClick="mOnClick"
+            android:text="保存"
+            android:textColor="#f4f4f4"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="48dp"
+        android:layout_marginTop="48dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp" >
+<LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="签到人员"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/name_tv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:background="@drawable/ab_stacked_transparent_light_holo"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="签到日期"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/CheckDate_tv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:background="@drawable/ab_stacked_transparent_light_holo"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="经  纬  度"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/loction_tv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:background="@drawable/ab_stacked_transparent_light_holo"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="状       态"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <Spinner
+                    android:id="@+id/Status_spinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/spinner_background_holo_light"
+                    android:paddingBottom="0dp"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="签到说明"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:text="没有获取到经纬度"
+                    android:id="@+id/Remark_et"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/edit_text_holo_light"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="提示信息"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/ab_stacked_transparent_light_holo"
+                    android:gravity="center_vertical"
+                    android:hint="点击保存进行签到"
+                    android:paddingLeft="5dp"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

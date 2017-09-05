@@ -1,0 +1,264 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:2:1-123:12
+	package
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:4:11-48
+		INJECTED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml
+		INJECTED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml
+	android:versionName
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:6:11-36
+		INJECTED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml
+		INJECTED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml
+	xmlns:tools
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:3:11-57
+	android:versionCode
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:5:11-35
+		INJECTED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml
+		INJECTED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:2:11-69
+uses-sdk
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:8:5-10:41
+MERGED from [com.android.support:multidex:1.0.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\multidex\1.0.1\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:appcompat-v7:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:21:5-43
+MERGED from [com.android.support:support-compat:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:21:5-23:58
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:10:9-38
+		INJECTED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml
+		INJECTED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:9:9-34
+		INJECTED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml
+		INJECTED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml
+uses-permission#android.permission.CAMERA
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:12:5-65
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:12:22-62
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:13:5-67
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:13:22-64
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:14:5-81
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:14:22-78
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:15:5-81
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:15:22-78
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:16:5-79
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:16:22-76
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:17:5-79
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:17:22-76
+uses-permission#android.permission.READ_PHONE_STATE
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:18:5-75
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:18:22-72
+uses-permission#android.permission.MOUNT_UNMOUNT_FILESYSTEMS
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:19:5-84
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:19:22-81
+application
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:21:5-121:19
+MERGED from [com.android.support:appcompat-v7:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-v4:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-fragment:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-media-compat:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-ui:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:support-core-utils:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\AndroidManifest.xml:25:5-20
+MERGED from [com.android.support:animated-vector-drawable:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-vector-drawable:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\AndroidManifest.xml:23:5-20
+MERGED from [com.android.support:support-compat:24.2.1] C:\Users\sunny\Desktop\RoadTools\roadtools\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\AndroidManifest.xml:25:5-20
+	android:label
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:26:9-41
+	android:hardwareAccelerated
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:24:9-44
+	android:allowBackup
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:23:9-35
+	android:icon
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:25:9-38
+	android:theme
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:27:9-40
+	tools:replace
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:28:9-51
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:22:9-72
+provider#android.support.v4.content.FileProvider
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:30:9-38:20
+	android:authorities
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:32:13-62
+	android:grantUriPermissions
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:34:13-47
+	android:exported
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:33:13-37
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:31:13-67
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:35:13-37:64
+	android:resource
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:37:17-61
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:36:17-67
+activity#com.changshagaosu.roadtools.ui.SplashActivity
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:39:9-48:20
+	android:screenOrientation
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:41:13-49
+	android:theme
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:42:13-77
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:40:13-73
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:43:13-47:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:44:17-69
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:44:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:46:17-77
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:46:27-74
+activity#com.changshagaosu.roadtools.ui.MainActivity
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:49:9-53:69
+	android:screenOrientation
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:52:13-49
+	android:launchMode
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:51:13-44
+	android:theme
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:53:13-66
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:50:13-71
+activity#com.changshagaosu.roadtools.ui.PatrolActivity
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:54:9-57:69
+	android:screenOrientation
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:56:13-49
+	android:theme
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:57:13-66
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:55:13-73
+activity#com.changshagaosu.roadtools.ui.PatrolingActivity
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:58:9-61:69
+	android:screenOrientation
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:60:13-49
+	android:theme
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:61:13-66
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:59:13-76
+activity#com.changshagaosu.roadtools.ui.PatrolContentActivity
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:62:9-66:69
+	android:screenOrientation
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:65:13-49
+	android:configChanges
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:64:13-63
+	android:theme
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:66:13-66
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:63:13-80
+activity#com.changshagaosu.roadtools.ui.DiseaseActivity
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:67:9-71:69
+	android:screenOrientation
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:70:13-49
+	android:configChanges
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:69:13-63
+	android:theme
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:71:13-66
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:68:13-74
+activity#com.changshagaosu.roadtools.ui.CheckinActivity
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:72:9-76:69
+	android:screenOrientation
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:75:13-49
+	android:configChanges
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:74:13-63
+	android:theme
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:76:13-66
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:73:13-74
+activity#com.changshagaosu.roadtools.ui.LoginActivity
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:77:9-81:69
+	android:screenOrientation
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:80:13-49
+	android:launchMode
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:79:13-48
+	android:theme
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:81:13-66
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:78:13-72
+activity#com.changshagaosu.roadtools.ui.SettingsActivity
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:82:9-85:69
+	android:screenOrientation
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:84:13-49
+	android:theme
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:85:13-66
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:83:13-75
+activity#com.changshagaosu.roadtools.ui.DiseaseSubActivity
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:86:9-89:69
+	android:screenOrientation
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:88:13-49
+	android:theme
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:89:13-66
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:87:13-77
+activity#com.changshagaosu.roadtools.ui.PictureActivity
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:90:9-93:69
+	android:screenOrientation
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:92:13-49
+	android:theme
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:93:13-66
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:91:13-74
+service#com.nobcdz.upload.UploadImageService
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:96:9-102:19
+	android:exported
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:98:13-37
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:97:13-64
+intent-filter#xxxxxx
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:99:13-101:29
+	android:priority
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:99:28-51
+action#xxxxxx
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:100:17-48
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:100:25-46
+service#com.changshagaosu.roadtools.service.PatrolService
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:103:9-85
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:103:18-82
+service#com.umeng.common.net.DownloadingService
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:104:9-107:19
+	android:process
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:106:13-50
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:105:13-67
+activity#com.umeng.update.UpdateDialogActivity
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:109:9-112:20
+	android:theme
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:111:13-72
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:110:13-65
+meta-data#UMENG_APPKEY
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:114:9-117:21
+	android:value
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:116:13-53
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:115:13-40
+meta-data#UMENG_CHANNEL
+ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:118:9-120:37
+	android:value
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:120:13-34
+	android:name
+		ADDED from C:\Users\sunny\Desktop\RoadTools\roadtools\AndroidManifest.xml:119:13-41

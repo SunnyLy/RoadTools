@@ -1,0 +1,61 @@
+def isHet() {
+    def has = hasProperty('NEXUS_TYPE');
+    if (has) {
+        return NEXUS_TYPE.contains("maven") ? false : true;
+    } else {
+        return true;
+    }
+}
+
+def isRelease() {
+    def has = hasProperty('RELEASE');
+    return has
+}
+//全局扩展参数
+ext {
+    //默认参数配置
+    config = [GROUP                  : "com.github.szhittech",
+              POM_PACKAGING          : "aar",
+              HET_NEXUS_RELEASES     : "http://200.200.200.40:8083/nexus/content/repositories/releases/",//#发布releases版的地址
+              HET_NEXUS_SNAPSHOTS    : "http://200.200.200.40:8083/nexus/content/repositories/snapshots/",//#发布snapshots版的地址
+              JCENTER_NEXUS_SNAPSHOTS: "https://oss.sonatype.org/content/repositories/snapshots/",//#JCenter快照版snapshots的地址
+              JCENTER_NEXUS_RELEASES : "https://oss.sonatype.org/service/local/staging/deploy/maven2/",//#JCenter快照版RELEASES 的地址
+              NEXUS_USERNAME         : "szhittech",
+              NEXUS_PASSWORD         : "het123456",
+              NEXUS_USERNAME_HET     : "admin",
+              NEXUS_PASSWORD_HET     : "admin123",
+              POM_DESCRIPTION        : "szhittech",
+              POM_URL                : "https://github.com/szhittech/szhittech",
+              POM_SCM_URL            : "https://github.com/szhittech/szhittech",
+              POM_SCM_CONNECTION     : "scm:git@github.com:szhittech/szhittech.git",
+              POM_SCM_DEV_CONNECTION : "scm:git@github.com:szhittech/szhittech.git",
+              POM_LICENCE_NAME       : "The Apache Software License, Version 2.0",
+              POM_LICENCE_URL        : "http://www.apache.org/licenses/LICENSE-2.0.txt",
+              POM_LICENCE_DIST       : "repo",
+              POM_DEVELOPER_ID       : "szhittech"
+
+    ]
+
+    allprojects {
+        repositories {
+            if (isHet()) {
+                //设置HeT仓库环境地址
+                maven { url config.HET_NEXUS_RELEASES }
+                maven { url config.HET_NEXUS_SNAPSHOTS }
+            } else {
+                //设置JCenter仓库环境地址
+                maven { url config.JCENTER_NEXUS_SNAPSHOTS }
+                maven { url config.JCENTER_NEXUS_RELEASES }
+            }
+        }
+    }
+
+    //Android编译版本管理
+    android = [compileSdkVersion: 24,
+               buildToolsVersion: "24.0.1",
+               minSdkVersion    : 15,
+               targetSdkVersion : 24,
+               ]
+
+
+}

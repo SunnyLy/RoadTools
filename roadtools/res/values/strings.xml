@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">养护巡查管理系统</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="weather">"天		气"</string>
+    <string name="Recordor">"记录人	"</string>
+    <string name="RoadLine">"路		线"</string>
+    <string name="RoadPart">"路		段"</string>
+    <string name="TrafficLine">"路元分类"</string>
+    <string name="RoadComposition">"结构类型"</string>
+    <string name="StakeNumberStart">"起始桩号"</string>
+    <string name="StakeNumberEnd">"终止桩号"</string>
+    <string name="ReportorDate">"报告日期"</string>
+    <string name="ReportorTime">"报告时间"</string>
+    <string name="PaveBlockSN">"路		元"</string>
+    <string name="DiseaseType">"病害类型"</string>
+    <string name="DiseaseLevel">"病害等级"</string>
+<string name="Reportor">"报告人	"</string>
+<string name="copyright">"Copyright © 2014 养护巡查管理系统. All Rights Reserved."</string>
+
+    <string name="permission">权限(permission)</string>
+    <string name="no_permissions">应用需要必要的运行权限</string>
+
+    <string name="settings">设置</string>
+    <string name="help">帮助</string>
+    <string name="string_help_text">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。\n\n最后点击两次后退按钮，即可返回。</string>
+    <string name="quit">退出</string>
+</resources>

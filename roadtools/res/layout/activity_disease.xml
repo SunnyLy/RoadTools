@@ -1,0 +1,447 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f4f4f4" >
+<TextView android:background="@drawable/cab_background_top_holo_dark"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="病害信息"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+    <ImageButton
+        android:layout_alignParentRight="true"
+        android:id="@+id/take_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="#00000000"
+        android:src="@drawable/device_access_camera64"
+        android:onClick="mOnClick" />
+
+    <ImageButton
+        android:layout_alignParentLeft="true"
+        android:id="@+id/add_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="#00000000"
+        android:src="@drawable/ic_input_add"
+        android:onClick="mOnClick" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="#cc002e3e"
+            android:onClick="mOnClick"
+            android:text="关闭"
+            android:textColor="#f4f4f4"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="#33b5e5" />
+
+        <Button
+            android:id="@+id/disease_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="#cc002e3e"
+            android:onClick="mOnClick"
+            android:text="上报"
+            android:textColor="#f4f4f4"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="48dp"
+        android:layout_marginTop="48dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="路       线"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/LineName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:background="@drawable/ab_stacked_transparent_light_holo"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="位       置"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <Spinner android:paddingBottom="0dp"
+                    android:id="@+id/DiseLocationName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/spinner_background_holo_light"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="40dip"
+                        android:background="@drawable/numberpicker_input_disabled"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="@string/StakeNumberStart"
+                        android:textColor="#666666"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dip"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="K"
+                        android:textColor="#666666"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/DiseStartStakePre"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/edit_text_holo_light"
+                        android:digits="1234567890"
+                        android:hint="0000"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dip"
+                        android:gravity="center_vertical"
+                        android:text="+"
+                        android:textColor="#666666"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/DiseEndStakePre"
+                        android:layout_width="fill_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/edit_text_holo_light"
+                        android:digits="1234567890"
+                        android:hint="0000"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="40dip"
+                        android:background="@drawable/numberpicker_input_disabled"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="结束桩号"
+                        android:textColor="#666666"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dip"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="K"
+                        android:textColor="#666666"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/DiseStartStakeLast"
+                        android:layout_width="80dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/edit_text_holo_light"
+                        android:digits="1234567890"
+                        android:hint="0000"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dip"
+                        android:gravity="center_vertical"
+                        android:text="+"
+                        android:textColor="#666666"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/DiseEndStakeLast"
+                        android:layout_width="fill_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/edit_text_holo_light"
+                        android:digits="1234567890"
+                        android:hint="0000"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:singleLine="true"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="病害类别"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <Spinner android:paddingBottom="0dp"
+                    android:id="@+id/DiseTypeName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/spinner_background_holo_light"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/DiseaseType"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <Spinner android:paddingBottom="0dp"
+                    android:id="@+id/DiseLMTypeName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/spinner_background_holo_light"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/DiseaseLevel"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <Spinner android:paddingBottom="0dp"
+                    android:id="@+id/DiseRank"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/spinner_background_holo_light"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="报告时间"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/DiseReportTime"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:background="@drawable/ab_stacked_transparent_light_holo"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:singleLine="true"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="病害说明"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/DiseDetail"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/edit_text_holo_light"
+                    android:hint="请在此输入病害说明"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="40dip"
+                        android:background="@drawable/numberpicker_input_disabled"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:text="提示信息"
+                        android:textColor="#666666"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/Info"
+                        android:layout_width="fill_parent"
+                        android:layout_height="40dip"
+                        android:background="@drawable/ab_stacked_transparent_light_holo"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dp"
+                        android:singleLine="true"
+                        android:text="先上报再拍照"
+                        android:textColor="#666666"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:layout_weight="1"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/select_pic_btn"
+                        android:layout_width="fill_parent"
+                        android:layout_height="40dp"
+                        android:background="#818181"
+                        android:onClick="mOnClick"
+                        android:padding="10dp"
+                        android:text="选择图片"
+                        android:textColor="#ffffff"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,12 @@
+//全局扩展参数
+ext {
+
+    //android版本
+    android_version = [
+            versionCode: 32,
+            versionName: '1.1.0',
+            versionNameSuffix: '_10',
+            appName    : 'RoadTools',
+            channel    : 'HuNan',
+    ]
+}

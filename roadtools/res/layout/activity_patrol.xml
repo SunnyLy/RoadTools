@@ -1,0 +1,226 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f4f4f4" >
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/cab_background_top_holo_dark" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="巡查日志"
+        android:textColor="#ffffff"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="#cc002e3e"
+            android:onClick="mOnClick"
+            android:text="取消"
+            android:textColor="#f4f4f4"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="#33b5e5" />
+
+        <Button
+            android:id="@+id/start_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="#cc002e3e"
+            android:onClick="mOnClick"
+            android:text="开始巡查"
+            android:textColor="#f4f4f4"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="48dp"
+        android:layout_marginTop="48dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="路       线"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <Spinner
+                    android:paddingBottom="0dp"
+                    android:id="@+id/roadline_spinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/spinner_background_holo_light"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="巡查路段"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/roadpart_et"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/edit_text_holo_light"
+                    android:hint="默认为全线"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="开始时间"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/CheckDate_tv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dip"
+                    android:background="@drawable/ab_stacked_transparent_light_holo"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="巡查人员"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/user_et"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/edit_text_holo_light"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="天       气"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <Spinner
+                    android:paddingBottom="0dp"
+                    android:id="@+id/weather_spinner"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/spinner_background_holo_light"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="#e8e8e8"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="40dip"
+                    android:background="@drawable/numberpicker_input_disabled"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="巡查内容"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/content_et"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/edit_text_holo_light"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
