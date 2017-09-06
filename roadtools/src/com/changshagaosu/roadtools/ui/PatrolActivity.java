@@ -138,7 +138,7 @@ public class PatrolActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (mPermissionManager.lacksPermissions(mPermissions)){
+        if (mPermissionManager.lacksPermissions(mPermissions)) {
             startPermissionsActivity();
         }
     }
@@ -146,7 +146,7 @@ public class PatrolActivity extends Activity {
     //进入权限设置界面
     private void startPermissionsActivity() {
 
-        PermissionActivity.startActivityForResult(this,REQUEST_CODE,mPermissions);
+        PermissionActivity.startActivityForResult(this, REQUEST_CODE, mPermissions);
     }
 
     public void mOnClick(View view) {
@@ -261,7 +261,8 @@ public class PatrolActivity extends Activity {
 
     }
 
-    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // 拒绝时, 关闭页面, 缺少主要权限, 无法运行
         if (requestCode == REQUEST_CODE && resultCode == PermissionActivity.PERMISSIONS_DENIED) {
