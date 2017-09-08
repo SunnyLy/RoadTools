@@ -1,4 +1,4 @@
-#Wed Sep 06 09:03:23 CST 2017
-base.0=C\:\\Users\\sunny\\Desktop\\RoadTools\\roadtools\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
+#Fri Sep 08 18:39:13 CST 2017
+base.0=E\:\\studio_workspace\\RoadTools\\roadtools\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
-file.0=C\:\\Users\\sunny\\Desktop\\RoadTools\\roadtools\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex
+file.0=E\:\\studio_workspace\\RoadTools\\roadtools\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex

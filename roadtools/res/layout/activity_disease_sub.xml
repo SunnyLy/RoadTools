@@ -64,17 +64,49 @@
             android:layout_width="fill_parent"
             android:layout_height="40dip"
             android:background="#e8e8e8"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal" >
 
             <TextView
                 android:layout_width="80dp"
                 android:layout_height="40dip"
                 android:background="@drawable/numberpicker_input_disabled"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="5dp"
+                android:text="病害类型"
+                android:textColor="#666666"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_deasename"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingBottom="0dp"
+                android:textColor="#666666"
+                android:paddingLeft="5dp"
+                android:text="水沟、暗沟清理"
                 android:gravity="center_vertical"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!--项目名称-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:background="#e8e8e8"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/numberpicker_input_disabled"
+                android:gravity="center_vertical|left"
                 android:paddingLeft="5dp"
                 android:text="项目名称"
                 android:textColor="#666666"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <Spinner
                 android:id="@+id/item_spinner"
@@ -83,9 +115,39 @@
                 android:background="@drawable/spinner_background_holo_light"
                 android:paddingBottom="0dp"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
 
+        <!--项目代号-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:background="#e8e8e8"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/numberpicker_input_disabled"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="5dp"
+                android:text="项目代号"
+                android:textColor="#666666"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_proj_number"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textColor="#666666"
+                android:paddingLeft="5dp"
+                android:text="A201-01-01"
+                android:gravity="center_vertical|left"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <!-- 预计工程量-->
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="40dip"
@@ -95,77 +157,73 @@
                 android:layout_width="80dp"
                 android:layout_height="40dip"
                 android:background="@drawable/numberpicker_input_disabled"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|left"
                 android:paddingLeft="5dp"
-                android:text="发现位置"
+                android:text="工程量"
                 android:textColor="#666666"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/Engineering_tv"
-                android:layout_width="fill_parent"
-                android:layout_height="40dip"
-                android:background="@drawable/ab_stacked_transparent_light_holo"
-                android:gravity="center_vertical"
-                android:paddingLeft="5dp"
-                android:textColor="#666666"
-                android:textSize="14sp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/btn_mouse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:text="一"/>
+
+                <Button
+                    android:id="@+id/btn_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:text="＋"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/btn_add"
+                    android:layout_toRightOf="@+id/btn_mouse"
+                    android:hint="0"
+                    android:gravity="center"
+                    android:inputType="number"/>
+
+            </RelativeLayout>
+
+
         </LinearLayout>
 
+        <!--项目代号-->
         <LinearLayout
-            android:id="@+id/table_title"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/numberpicker_input_disabled"
+            android:layout_height="40dip"
+            android:background="#e8e8e8"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal" >
 
             <TextView
-                android:id="@+id/text_name"
-                android:layout_width="0dip"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:paddingBottom="10dip"
-                android:paddingTop="10dip"
-                android:text="项目代号"
-                android:textColor="#61646f"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="fill_parent"
-                android:background="@drawable/list_divider_holo_light" />
-
-            <TextView
-                android:id="@+id/text_phone"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:paddingBottom="10dip"
-                android:paddingTop="10dip"
-                android:text="项目名称"
-                android:textColor="#61646f"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="fill_parent"
-                android:background="@drawable/list_divider_holo_light" />
-
-            <TextView
-                android:id="@+id/text_role"
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:paddingBottom="10dip"
-                android:paddingTop="10dip"
+                android:layout_width="80dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/numberpicker_input_disabled"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="5dp"
                 android:text="单位"
-                android:textColor="#61646f"
+                android:textColor="#666666"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_unit"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textColor="#666666"
+                android:paddingLeft="5dp"
+                android:text="km.年"
+                android:gravity="center_vertical|left"
                 android:textSize="14sp" />
         </LinearLayout>
-
         <ListView
             android:id="@+id/list"
             android:layout_width="fill_parent"
@@ -178,7 +236,7 @@
             android:dividerHeight="1dp"
             android:fadingEdge="none"
             android:scrollbars="none"
-            android:visibility="visible" />
+            android:visibility="gone"/>
     </LinearLayout>
 
 </RelativeLayout>

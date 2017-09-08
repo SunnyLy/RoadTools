@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -37,7 +36,6 @@ public class DiseaseSubActivity extends Activity {
     private String Key;
     private String DiseaseCode;
     private String DiseLocationName;
-    private TextView engineeringTextView;
     private List<Item> items;
     private List<Item> items1;
     private Spinner nameSpinner;
@@ -55,7 +53,6 @@ public class DiseaseSubActivity extends Activity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_disease_sub);
-        engineeringTextView = (TextView) findViewById(R.id.Engineering_tv);
         nameSpinner = (Spinner) findViewById(R.id.item_spinner);
         listView = (ListView) findViewById(R.id.list);
 
@@ -63,8 +60,6 @@ public class DiseaseSubActivity extends Activity {
         Key = getIntent().getStringExtra("Key");
         DiseaseCode = getIntent().getStringExtra("DiseaseCode");
         DiseLocationName = getIntent().getStringExtra("DiseLocationName");
-
-        engineeringTextView.setText(DiseLocationName);
 
         loadData();
 

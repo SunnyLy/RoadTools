@@ -96,8 +96,8 @@
             android:name="com.changshagaosu.roadtools.ui.PictureActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
+        <activity android:name=".ui.ProjectEditorActivity"/>
 
-        <!--�����action��Ҫ�Լ��Ӹ�����-->
         <service
             android:name="com.nobcdz.upload.UploadImageService"
             android:exported="false" >
