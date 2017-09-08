@@ -10,13 +10,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.changshagaosu.roadtools.R;
-import com.changshagaosu.roadtools.bean.Item;
+import com.changshagaosu.roadtools.bean.RepairProjectBean;
 
 public class Item1Adapter extends BaseAdapter {
-	private List<Item> mList;
+	private List<RepairProjectBean> mList;
 	private Context mContext;
 
-	public Item1Adapter(Context pContext, List<Item> pList) {
+	public Item1Adapter(Context pContext, List<RepairProjectBean> pList) {
 		this.mContext = pContext;
 		this.mList = pList;
 	}

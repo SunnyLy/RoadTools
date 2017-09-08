@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#666666"
+    android:layout_height="match_parent">
+
+    <com.changshagaosu.roadtools.ui.view.tree.TreeListView
+        android:id="@+id/tree_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@android:color/transparent" />
+</LinearLayout>

@@ -2,12 +2,15 @@ package com.changshagaosu.roadtools.bean;
 
 import java.util.List;
 
-public class Item {
-	private int id;
-	private String DTypeID;
-	private String DTypeNumber;
-	private String DTypeName;
-	private String DTypeUnit;
+/**
+ * 维修工程Bean
+ */
+public class RepairProjectBean {
+	private int id;//这应该是自己的ID
+	private String DTypeID; //这应该是父Id
+	private String DTypeNumber; //工程量
+	private String DTypeName; //工程名称
+	private String DTypeUnit; //单位(年、月、日)
 
 	public int getId() {
 		return id;
@@ -50,13 +53,13 @@ public class Item {
 	}
 
 	public static class Data {
-		private List<Item> DiseaseItem;
+		private List<RepairProjectBean> DiseaseItem;
 
-		public List<Item> getDiseaseItem() {
+		public List<RepairProjectBean> getDiseaseItem() {
 			return DiseaseItem;
 		}
 
-		public void setDiseaseItem(List<Item> diseaseItem) {
+		public void setDiseaseItem(List<RepairProjectBean> diseaseItem) {
 			DiseaseItem = diseaseItem;
 		}
 

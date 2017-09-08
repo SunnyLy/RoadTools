@@ -10,14 +10,14 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.changshagaosu.roadtools.R;
-import com.changshagaosu.roadtools.bean.Item;
+import com.changshagaosu.roadtools.bean.RepairProjectBean;
 
 public class ItemAdapter extends BaseAdapter {
-	private List<Item> addressList;
-	private LayoutInflater mInflater;
+    private List<RepairProjectBean> addressList;
+    private LayoutInflater mInflater;
 
-	public ItemAdapter(Context c, List<Item> appList) {
-		addressList = appList;
+    public ItemAdapter(Context c, List<RepairProjectBean> appList) {
+        addressList = appList;
 		mInflater = (LayoutInflater) c
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -55,8 +55,8 @@ public class ItemAdapter extends BaseAdapter {
 		} else {
 			holder = (RecentViewHolder) convertView.getTag();
 		}
-		Item address = addressList.get(position);
-		if (address != null) {
+        RepairProjectBean address = addressList.get(position);
+        if (address != null) {
 			holder.unitText.setText(address.getDTypeUnit());
 			holder.nameText.setText(address.getDTypeName());
 			holder.codeText.setText(address.getDTypeNumber());
