@@ -25,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -114,6 +115,8 @@ public class DiseaseActivity extends Activity {
 	private DeaseProjectItemAdapter mDeaseProjAdapter;
 	private RoadListView mLvDeaseItem;
 
+	private LinearLayout mLLDeaseProj;
+
 	@Override
 	public void onConfigurationChanged(Configuration config) {
 		super.onConfigurationChanged(config);
@@ -127,18 +130,27 @@ public class DiseaseActivity extends Activity {
 		setContentView(R.layout.activity_disease);
 		SourceID = getIntent().getStringExtra("CheckDailyRecordID");
 		mDeaseProjectLists.clear();
-		for (int i = 0; i < 5; i++) {
-			DeaseProjectBean projectBean = new DeaseProjectBean();
-			projectBean.setItemID(i + 100);
-			projectBean.setItemCode("A3001_" + i);
-			projectBean.setEngineering((i + 10) + "");
-			projectBean.setItemUnit("km.年");
-			projectBean.setItemName("项目名称：" + i);
-			mDeaseProjectLists.add(projectBean);
-		}
 		mDeaseProjAdapter = new DeaseProjectItemAdapter(this, mDeaseProjectLists);
 		getView();
 		mLvDeaseItem.setAdapter(mDeaseProjAdapter);
+		mLvDeaseItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+				if (mDeaseProjectLists == null || mDeaseProjectLists.size() <= 0) {
+					return;
+				}
+				DeaseProjectBean projectBean = mDeaseProjectLists.get(position);
+				Log.e("RoadTools", projectBean.toString());
+				//EditeDeaseActivity.startEditeDeaseActivity(DiseaseActivity.this,projectBean);
+				Intent intent = new Intent(DiseaseActivity.this, EditeDeaseActivity.class);
+				if (projectBean != null) {
+					Bundle bundle = new Bundle();
+					bundle.putSerializable(EditeDeaseActivity.TAG, projectBean);
+					intent.putExtras(bundle);
+				}
+				startActivityForResult(intent, 0x101);
+			}
+		});
 		init();
 		initListener();
 	}
@@ -280,6 +292,8 @@ public class DiseaseActivity extends Activity {
 		diseDetailEditText = (EditText) findViewById(R.id.DiseDetail);
 
 		mLvDeaseItem = (RoadListView) findViewById(R.id.list_project);
+		mLLDeaseProj = (LinearLayout) findViewById(R.id.layout_dease_project);
+		mLLDeaseProj.setVisibility(View.GONE);
 	}
 
 	public void mOnClick(View view) {
@@ -365,6 +379,7 @@ public class DiseaseActivity extends Activity {
 					}
 					break;
 
+				case 0x101:
 				case REQUEST_CODE:
 					//添加病害维修项目成功
 					getDeaseItems();
@@ -389,13 +404,16 @@ public class DiseaseActivity extends Activity {
 					@Override
 					public void onResponse(DeaseProjectBean.RequestData response) {
 						if (response != null && response.isSuccess()) {
-							Log.e("RoadTools_Success", response.getData().getDiseaseItem().toString());
-							mDeaseProjectLists = response.getData().getDiseaseItem();
-							if (mDeaseProjectLists != null && mDeaseProjectLists.size() > 0) {
-								mDeaseProjAdapter.notifyDataSetChanged();
-							} else {
-
+							DeaseProjectBean.Data data = response.getData();
+							if (data != null) {
+								mDeaseProjectLists = data.getDiseaseItem();
+								if (mDeaseProjectLists != null && mDeaseProjectLists.size() > 0) {
+									mLLDeaseProj.setVisibility(View.VISIBLE);
+									Log.e("RoadTools_Success", mDeaseProjectLists.toString());
+									mDeaseProjAdapter.notifyDataSetChanged();
+								}
 							}
+
 						}
 					}
 				}, new Response.ErrorListener() {
@@ -403,6 +421,7 @@ public class DiseaseActivity extends Activity {
 			@Override
 			public void onErrorResponse(VolleyError error) {
 
+				mLLDeaseProj.setVisibility(View.GONE);
 				Log.e("RoadTools_onError", error.getMessage());
 			}
 		}), this);

@@ -32,8 +32,10 @@ public class SplashActivity extends Activity {
 
 		db = FinalDb.create(getApplicationContext());
 		if (db.findAll(Disease.class).isEmpty()) {
+			Log.e("RoadTools", "Disease为null");
 			loadData();
 		} else {
+			Log.e("RoadTools", "Disease不为null");
 			start();
 		}
 	}
@@ -87,6 +89,7 @@ public class SplashActivity extends Activity {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			if (result) {
+				Log.e("RoadTools", "loadDieaseData()");
 				loadDiseaseData();
 			} else {
 				start();
@@ -94,6 +97,9 @@ public class SplashActivity extends Activity {
 		}
 	}
 
+	/**
+	 * 病害类别
+	 */
 	private void loadDiseaseData() {
 		executeRequest(new com.changshagaosu.roadtools.json.GsonRequest<Disease.RequestData>(
 				new URLUtils().getInitData(getApplicationContext())
@@ -118,6 +124,7 @@ public class SplashActivity extends Activity {
 		@Override
 		protected Boolean doInBackground(Disease.RequestData... params) {
 			if (params[0].isSuccess()) {
+				Log.e("RoadTools","成功");
 				Disease.Data datas = params[0].getData();
 				List<Disease> lines = datas.getDisease();
 				for (Disease disease : lines) {
@@ -130,6 +137,7 @@ public class SplashActivity extends Activity {
 				}
 				return true;
 			} else {
+				Log.e("RoadTools","失败");
 				return false;
 			}
 		}

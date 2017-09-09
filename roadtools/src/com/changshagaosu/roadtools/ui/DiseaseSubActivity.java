@@ -29,6 +29,7 @@ import com.changshagaosu.roadtools.json.RequestManager;
 import com.changshagaosu.roadtools.preference.LoginPreference;
 import com.changshagaosu.roadtools.ui.view.tree.TreeListView;
 import com.changshagaosu.roadtools.utils.NetworkTool;
+import com.changshagaosu.roadtools.utils.ToastUtils;
 import com.nobcdz.upload.URLUtils;
 
 import org.json.JSONObject;
@@ -125,6 +126,10 @@ public class DiseaseSubActivity extends Activity {
         switch (view.getId()) {
             case R.id.start_btn:
                 mProjectNumber = mETProjectNumber.getText().toString().trim();
+                if (TextUtils.isEmpty(Key) || TextUtils.isEmpty(LMTypeName) || TextUtils.isEmpty(DTypeName)) {
+                    ToastUtils.showShort(DiseaseSubActivity.this, R.string.select_project);
+                    return;
+                }
                 new PatrolAsyn().execute();
                 break;
             case R.id.cancel_btn:
@@ -173,28 +178,28 @@ public class DiseaseSubActivity extends Activity {
                                 nameSpinner.setAdapter(item1Adapter);
                             } else {
 
-                                items = new ArrayList<>();
-                                DeaseItem projectBean = new DeaseItem();
-                                projectBean.setId(1);
-                                projectBean.setDTypeID("3B7A5704-945E-4F51-B191-63B758FBEA88");
-                                projectBean.setDTypeName("交通量≥3万辆路段（京港澳、沪昆）");
-                                projectBean.setDTypeNumber("A301-01-01");//项目代号
-                                projectBean.setDTypeUnit("km·年");
-                                projectBean.setDFullTypeName("路面清扫保洁（双幅，不含桥涵、隧道，含边坡、碎落台、收费广场保洁）-高速公路-交通量≥3万辆路段（京港澳、沪昆）");
-
-                                DeaseItem projectBean2 = new DeaseItem();
-                                projectBean2.setId(1);
-                                projectBean2.setDTypeID("68B8FE4D-B643-475F-993C-617C65AB6CC2");
-                                projectBean2.setDTypeName("交通量＜3万辆路段");
-                                projectBean2.setDTypeNumber("A301-01-02");//项目代号
-                                projectBean2.setDTypeUnit("km·年");
-                                projectBean2.setDFullTypeName("路面清扫保洁（双幅，不含桥涵、隧道，含边坡、碎落台、收费广场保洁）-高速公路-交通量≥3万辆路段（京港澳、沪昆）-交通量＜3万辆路段");
-
-                                items.add(projectBean);
-                                items.add(projectBean2);
-                                item1Adapter = new Item1Adapter(
-                                        getApplicationContext(), items);
-                                nameSpinner.setAdapter(item1Adapter);
+//                                items = new ArrayList<>();
+//                                DeaseItem projectBean = new DeaseItem();
+//                                projectBean.setId(1);
+//                                projectBean.setDTypeID("3B7A5704-945E-4F51-B191-63B758FBEA88");
+//                                projectBean.setDTypeName("交通量≥3万辆路段（京港澳、沪昆）");
+//                                projectBean.setDTypeNumber("A301-01-01");//项目代号
+//                                projectBean.setDTypeUnit("km·年");
+//                                projectBean.setDFullTypeName("路面清扫保洁（双幅，不含桥涵、隧道，含边坡、碎落台、收费广场保洁）-高速公路-交通量≥3万辆路段（京港澳、沪昆）");
+//
+//                                DeaseItem projectBean2 = new DeaseItem();
+//                                projectBean2.setId(1);
+//                                projectBean2.setDTypeID("68B8FE4D-B643-475F-993C-617C65AB6CC2");
+//                                projectBean2.setDTypeName("交通量＜3万辆路段");
+//                                projectBean2.setDTypeNumber("A301-01-02");//项目代号
+//                                projectBean2.setDTypeUnit("km·年");
+//                                projectBean2.setDFullTypeName("路面清扫保洁（双幅，不含桥涵、隧道，含边坡、碎落台、收费广场保洁）-高速公路-交通量≥3万辆路段（京港澳、沪昆）-交通量＜3万辆路段");
+//
+//                                items.add(projectBean);
+//                                items.add(projectBean2);
+//                                item1Adapter = new Item1Adapter(
+//                                        getApplicationContext(), items);
+//                                nameSpinner.setAdapter(item1Adapter);
                             }
                         }
                     }
@@ -275,8 +280,6 @@ public class DiseaseSubActivity extends Activity {
         protected void onPostExecute(String result) {
             progress.dismiss();
             if (result.equals("1")) {
-//                itemAdapter = new ItemAdapter(getApplicationContext(), items1);
-//                listView.setAdapter(itemAdapter);
                 //添加成功回到病害信息主界面
                 Toast.makeText(getApplicationContext(), "添加成功",
                         Toast.LENGTH_LONG).show();
@@ -287,5 +290,34 @@ public class DiseaseSubActivity extends Activity {
                         Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    public void doMouse(View view) {
+        operateProjNumber(false);
+    }
+
+    public void doAdd(View view) {
+        operateProjNumber(true);
+    }
+
+    /**
+     * 修改工程数量
+     *
+     * @param toAdd
+     */
+    private void operateProjNumber(boolean toAdd) {
+
+        String projNumber = mETProjectNumber.getText().toString();
+        int num = Integer.parseInt(TextUtils.isEmpty(projNumber) ? "0" : projNumber);
+        if (toAdd) {
+            num++;
+        } else {
+            num--;
+            if (num <= 0) {
+                num = 0;
+            }
+        }
+
+        mETProjectNumber.setText(num + "");
     }
 }

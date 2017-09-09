@@ -1,12 +1,13 @@
 package com.changshagaosu.roadtools.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 病害项目Bean
  */
-public class DeaseProjectBean {
-    private int ItemID;//这应该是自己的ID
+public class DeaseProjectBean implements Serializable {
+    private int ItemID;//病害项目主键
     private String ItemCode; //病害项目代号
     private String ItemName; //病害项目名称
     private String Engineering; //预计工程量
