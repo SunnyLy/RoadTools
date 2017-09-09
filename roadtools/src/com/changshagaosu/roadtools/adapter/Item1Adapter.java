@@ -1,7 +1,5 @@
 package com.changshagaosu.roadtools.adapter;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +8,15 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.changshagaosu.roadtools.R;
-import com.changshagaosu.roadtools.bean.RepairProjectBean;
+import com.changshagaosu.roadtools.bean.DeaseItem;
+
+import java.util.List;
 
 public class Item1Adapter extends BaseAdapter {
-	private List<RepairProjectBean> mList;
+	private List<DeaseItem> mList;
 	private Context mContext;
 
-	public Item1Adapter(Context pContext, List<RepairProjectBean> pList) {
+	public Item1Adapter(Context pContext, List<DeaseItem> pList) {
 		this.mContext = pContext;
 		this.mList = pList;
 	}
@@ -44,7 +44,7 @@ public class Item1Adapter extends BaseAdapter {
 		if (convertView != null) {
 			TextView _TextView1 = (TextView) convertView
 					.findViewById(R.id.text1);
-			_TextView1.setText(mList.get(position).getDTypeName());
+			_TextView1.setText(mList.get(position).getDFullTypeName());
 		}
 		return convertView;
 	}

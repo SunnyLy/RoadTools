@@ -29,14 +29,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.changshagaosu.roadtools.R;
+import com.changshagaosu.roadtools.adapter.DeaseProjectItemAdapter;
 import com.changshagaosu.roadtools.adapter.N_DiseLMTypeAdapter;
 import com.changshagaosu.roadtools.adapter.N_DiseLocationAdapter;
 import com.changshagaosu.roadtools.adapter.N_DiseTypeAdapter;
+import com.changshagaosu.roadtools.bean.DeaseProjectBean;
 import com.changshagaosu.roadtools.bean.sub.Disease;
 import com.changshagaosu.roadtools.bean.sub.RoadLine;
+import com.changshagaosu.roadtools.json.RequestManager;
 import com.changshagaosu.roadtools.preference.BasePreference;
 import com.changshagaosu.roadtools.preference.LoginPreference;
+import com.changshagaosu.roadtools.ui.view.RoadListView;
 import com.changshagaosu.roadtools.utils.NetworkTool;
 import com.nobcdz.upload.URLUtils;
 import com.nobcdz.upload.UploadImageService;
@@ -48,6 +54,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -100,6 +107,13 @@ public class DiseaseActivity extends Activity {
 
 	private String Key;
 	private String SourceID;
+	private final int REQUEST_CODE = 0x100;
+
+	//病害维修项目列表
+	private List<DeaseProjectBean> mDeaseProjectLists = new ArrayList<>();
+	private DeaseProjectItemAdapter mDeaseProjAdapter;
+	private RoadListView mLvDeaseItem;
+
 	@Override
 	public void onConfigurationChanged(Configuration config) {
 		super.onConfigurationChanged(config);
@@ -112,10 +126,20 @@ public class DiseaseActivity extends Activity {
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.activity_disease);
 		SourceID = getIntent().getStringExtra("CheckDailyRecordID");
+		mDeaseProjectLists.clear();
+		for (int i = 0; i < 5; i++) {
+			DeaseProjectBean projectBean = new DeaseProjectBean();
+			projectBean.setItemID(i + 100);
+			projectBean.setItemCode("A3001_" + i);
+			projectBean.setEngineering((i + 10) + "");
+			projectBean.setItemUnit("km.年");
+			projectBean.setItemName("项目名称：" + i);
+			mDeaseProjectLists.add(projectBean);
+		}
+		mDeaseProjAdapter = new DeaseProjectItemAdapter(this, mDeaseProjectLists);
 		getView();
-
+		mLvDeaseItem.setAdapter(mDeaseProjAdapter);
 		init();
-
 		initListener();
 	}
 
@@ -254,6 +278,8 @@ public class DiseaseActivity extends Activity {
 		diseStartStakeLastEditText = (EditText) findViewById(R.id.DiseStartStakeLast);
 		diseEndStakeLastEditText = (EditText) findViewById(R.id.DiseEndStakeLast);
 		diseDetailEditText = (EditText) findViewById(R.id.DiseDetail);
+
+		mLvDeaseItem = (RoadListView) findViewById(R.id.list_project);
 	}
 
 	public void mOnClick(View view) {
@@ -275,7 +301,10 @@ public class DiseaseActivity extends Activity {
 					intent.putExtra("Key", Key);
 					intent.putExtra("DiseaseCode", DiseType);
 					intent.putExtra("DiseLocationName", DiseLocationName);
-					startActivity(intent);
+					intent.putExtra("DieaseTypeName", DiseLMTypeName);
+					intent.putExtra("DiseLMType", DiseLMType);//主表病害类型主键
+
+					startActivityForResult(intent, REQUEST_CODE);
 				} else {
 					Toast.makeText(getApplicationContext(), "请先保存病害信息",
 							Toast.LENGTH_LONG).show();
@@ -334,10 +363,49 @@ public class DiseaseActivity extends Activity {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					break;
+
+				case REQUEST_CODE:
+					//添加病害维修项目成功
+					getDeaseItems();
+
+					break;
 				default:
 					break;
 			}
 		}
+	}
+
+	/**
+	 * 获取病害项目列表
+	 */
+	private void getDeaseItems() {
+		RequestManager.addRequest(new com.changshagaosu.roadtools.json.GsonRequest<>(
+				new URLUtils().getInitData(getApplicationContext())
+						+ "Action=SDiseaseList&"
+						+ "Key=" + Key,
+				DeaseProjectBean.RequestData.class, null,
+				new Response.Listener<DeaseProjectBean.RequestData>() {
+					@Override
+					public void onResponse(DeaseProjectBean.RequestData response) {
+						if (response != null && response.isSuccess()) {
+							Log.e("RoadTools_Success", response.getData().getDiseaseItem().toString());
+							mDeaseProjectLists = response.getData().getDiseaseItem();
+							if (mDeaseProjectLists != null && mDeaseProjectLists.size() > 0) {
+								mDeaseProjAdapter.notifyDataSetChanged();
+							} else {
+
+							}
+						}
+					}
+				}, new Response.ErrorListener() {
+
+			@Override
+			public void onErrorResponse(VolleyError error) {
+
+				Log.e("RoadTools_onError", error.getMessage());
+			}
+		}), this);
 	}
 
 	public String createThumbnail(Bitmap source) {

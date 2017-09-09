@@ -1,12 +1,11 @@
 package com.changshagaosu.roadtools.json;
 
-import java.io.File;
-
 import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.android.volley.Cache;
@@ -18,6 +17,8 @@ import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.ImageLoader;
 import com.changshagaosu.roadtools.RoadToolsApplication;
+
+import java.io.File;
 
 public class RequestManager {
     public static RequestQueue mRequestQueue = newRequestQueue();
@@ -48,6 +49,7 @@ public class RequestManager {
         if (tag != null) {
             request.setTag(tag);
         }
+        Log.e("RoadTools", request.toString());
         mRequestQueue.add(request);
     }
 

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="40dp"
+              android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/deaseId"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1.0"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="#333333"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv_dease_type_number"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1.0"
+        android:gravity="center"
+        android:text="A3001_1_1"
+        android:textColor="#333333"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv_dease_project_name"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1.0"
+        android:gravity="center"
+        android:text="检查进水情况恩恩恩恩恩恩"
+        android:maxLines="1"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:focusable="true"
+        android:textColor="#333333"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv_dease_unit"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1.0"
+        android:gravity="center"
+        android:text="km.年"
+        android:maxLines="1"
+        android:textColor="#333333"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/tv_dease_project_number"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1.0"
+        android:gravity="center"
+        android:text="3"
+        android:maxLines="1"
+        android:textColor="#333333"
+        android:textSize="14sp"/>
+
+</LinearLayout>

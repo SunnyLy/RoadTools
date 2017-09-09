@@ -2,34 +2,32 @@ package com.changshagaosu.roadtools.ui;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.changshagaosu.roadtools.R;
 import com.changshagaosu.roadtools.adapter.Item1Adapter;
 import com.changshagaosu.roadtools.adapter.ItemAdapter;
 import com.changshagaosu.roadtools.adapter.RepairProjectAdapter;
-import com.changshagaosu.roadtools.bean.RepairProjectBean;
+import com.changshagaosu.roadtools.bean.DeaseItem;
 import com.changshagaosu.roadtools.bean.UserBean;
-import com.changshagaosu.roadtools.callback.ITreeSelectCallback;
 import com.changshagaosu.roadtools.json.RequestManager;
 import com.changshagaosu.roadtools.preference.LoginPreference;
 import com.changshagaosu.roadtools.ui.view.tree.TreeListView;
-import com.changshagaosu.roadtools.ui.view.tree.TreeNode;
 import com.changshagaosu.roadtools.utils.NetworkTool;
 import com.nobcdz.upload.URLUtils;
 
@@ -41,12 +39,12 @@ import java.util.List;
 public class DiseaseSubActivity extends Activity {
     private String UserID;
     private String Key;
-    private String DiseaseCode;
+    private String DiseaseCode;//病害类别Id
     private String DiseLocationName;
-    private List<RepairProjectBean> items;
-    private List<RepairProjectBean> items1;
-    //    private Spinner nameSpinner;
-    private TextView mTvProjName;//项目名称层级树
+    private String LMTypeName;//病害主表选择选择的病害类型名称
+    private List<DeaseItem> items;
+    private List<DeaseItem> items1;
+    private Spinner nameSpinner;
     private Item1Adapter item1Adapter;
     private ListView listView;
     private ItemAdapter itemAdapter;
@@ -55,12 +53,18 @@ public class DiseaseSubActivity extends Activity {
     private String DTypeNumber;
     private String DTypeUnit;
 
+    private TextView mTvProjTypeNum;
+    private TextView mTvProjUnit;
+    private TextView mDeaseTypeName;
+    private EditText mETProjectNumber;//工程数量
+
     //多级树形
     private View mTreeCompact;
     private TreeListView mTreeListView;
     private RepairProjectAdapter mRepairAdapter;
-    private PopupWindow mPopupWindow;
     private List<UserBean> mDataList = new ArrayList<>();
+    private String mProjectNumber;
+    private String LMTypeID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,73 +72,59 @@ public class DiseaseSubActivity extends Activity {
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_disease_sub);
-//        nameSpinner = (Spinner) findViewById(R.id.item_spinner);
-        mTvProjName = (TextView) findViewById(R.id.item_spinner);
+        nameSpinner = (Spinner) findViewById(R.id.item_spinner);
         listView = (ListView) findViewById(R.id.list);
+        mTvProjTypeNum = (TextView) findViewById(R.id.tv_proj_number);
+        mTvProjUnit = (TextView) findViewById(R.id.tv_unit);
+        mDeaseTypeName = (TextView) findViewById(R.id.tv_deasename);
+        mETProjectNumber = (EditText) findViewById(R.id.et_project_number);
 
         UserID = LoginPreference.find().get("loginID");
-        Key = getIntent().getStringExtra("Key");
-        DiseaseCode = getIntent().getStringExtra("DiseaseCode");
-        DiseLocationName = getIntent().getStringExtra("DiseLocationName");
+        Intent intent = getIntent();
+        if (intent != null) {
+            Key = intent.getStringExtra("Key");
+            DiseaseCode = intent.getStringExtra("DiseaseCode");
+            DiseLocationName = intent.getStringExtra("DiseLocationName");
+            LMTypeName = intent.getStringExtra("DieaseTypeName");
+            LMTypeID = intent.getStringExtra("DiseLMType");
+            mDeaseTypeName.setText(LMTypeName);
+        }
 
-        //loadData();
-        makeData();
+        loadData();
+        items1 = new ArrayList<>();
+        nameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-        items1 = new ArrayList<RepairProjectBean>();
-
-        mTreeCompact = LayoutInflater.from(this).inflate(R.layout.widget_tree_view, null);
-        mTreeListView = (TreeListView) mTreeCompact.findViewById(R.id.tree_lv);
-        mRepairAdapter = new RepairProjectAdapter(this, mDataList);
-        mRepairAdapter.setmCallback(new ITreeSelectCallback() {
             @Override
-            public void onItemSelected(int id, boolean selected) {
-
-            }
-        });
-        mTreeListView.setAdapter(mRepairAdapter);
-        initPopupWindow();
-        mTvProjName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mPopupWindow != null && !mPopupWindow.isShowing()) {
-                    mPopupWindow.showAsDropDown(mTvProjName);
-                } else if (mPopupWindow.isShowing()) {
-                    mPopupWindow.dismiss();
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int position, long arg3) {
+                if (items != null && items.size() > 0) {
+                    DTypeID = items.get(position).getDTypeID();
+                    DTypeName = items.get(position).getDTypeName();
+                    DTypeNumber = items.get(position).getDTypeNumber();
+                    DTypeUnit = items.get(position).getDTypeUnit();
+                    freshUI();
                 }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
 
             }
         });
-
-//        nameSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-//
-//            @Override
-//            public void onItemSelected(AdapterView<?> arg0, View arg1,
-//                                       int arg2, long arg3) {
-//                if (items != null && items.size() > 0) {
-//                    DTypeID = items.get(arg2).getDTypeID();
-//                    DTypeName = items.get(arg2).getDTypeName();
-//                    DTypeNumber = items.get(arg2).getDTypeNumber();
-//                    DTypeUnit = items.get(arg2).getDTypeUnit();
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> arg0) {
-//
-//            }
-//        });
     }
 
-    private void initPopupWindow() {
-        mPopupWindow = new PopupWindow(mTreeCompact, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        //mPopupWindow.setContentView(mTreeCompact);
-        mPopupWindow.setOutsideTouchable(true);
-        mPopupWindow.setFocusable(true);
+    /**
+     * 刷新界面
+     */
+    private void freshUI() {
+        mTvProjTypeNum.setText(DTypeNumber);
+        mTvProjUnit.setText(DTypeUnit);
     }
 
     public void mOnClick(View view) {
         switch (view.getId()) {
             case R.id.start_btn:
+                mProjectNumber = mETProjectNumber.getText().toString().trim();
                 new PatrolAsyn().execute();
                 break;
             case R.id.cancel_btn:
@@ -154,25 +144,57 @@ public class DiseaseSubActivity extends Activity {
      * 加载病害维修项目的数据
      */
     private void loadData() {
-        executeRequest(new com.changshagaosu.roadtools.json.GsonRequest<RepairProjectBean.RequestData>(
+        Key = "d56a519d-f0e8-4db4-89b1-63aca0ac3c1f";
+        DiseaseCode = "B600";
+
+        /**
+         * http://58.20.182.212:89/yhapp/API/API.aspx?Action=SDiseaseItem&Key=314a9d3f-305d-4f2e-abb8-5b4e2ca4a288
+         * &DiseaseCode=A200
+         *
+         * http://58.20.182.212:89/yhapp/API/API.aspx?Action=DiseaseItem&Key=d56a519d-f0e8-4db4-89b1-63aca0ac3c1f
+         * &DiseaseCode=B600
+         */
+
+        executeRequest(new com.changshagaosu.roadtools.json.GsonRequest<>(
                 new URLUtils().getInitData(getApplicationContext())
-                        + "Action=DiseaseItem&Key=" + Key + "&DiseaseCode="
-                        + DiseaseCode, RepairProjectBean.RequestData.class, null,
-                new Listener<RepairProjectBean.RequestData>() {
+                        + "Action=SDiseaseItem&" +
+                        "Key=" + Key + "&" +
+                        "DiseaseCode=" + DiseaseCode,
+                DeaseItem.RequestData.class, null,
+                new Response.Listener<DeaseItem.RequestData>() {
                     @Override
-                    public void onResponse(RepairProjectBean.RequestData response) {
-                        if (response.isSuccess()) {
+                    public void onResponse(DeaseItem.RequestData response) {
+                        if (response != null && response.isSuccess()) {
+                            Log.e("RoadTools_Success", response.getData().getDiseaseItem().toString());
+                            items = response.getData().getDiseaseItem();
                             if (items != null && items.size() > 0) {
-                                items = response.getData().getDiseaseItem();
                                 item1Adapter = new Item1Adapter(
                                         getApplicationContext(), items);
-                                //  nameSpinner.setAdapter(item1Adapter);
-                                DTypeID = items.get(0).getDTypeID();
-                                DTypeName = items.get(0).getDTypeName();
-                                DTypeNumber = items.get(0).getDTypeNumber();
-                                DTypeUnit = items.get(0).getDTypeUnit();
+                                nameSpinner.setAdapter(item1Adapter);
                             } else {
-                                makeData();
+
+                                items = new ArrayList<>();
+                                DeaseItem projectBean = new DeaseItem();
+                                projectBean.setId(1);
+                                projectBean.setDTypeID("3B7A5704-945E-4F51-B191-63B758FBEA88");
+                                projectBean.setDTypeName("交通量≥3万辆路段（京港澳、沪昆）");
+                                projectBean.setDTypeNumber("A301-01-01");//项目代号
+                                projectBean.setDTypeUnit("km·年");
+                                projectBean.setDFullTypeName("路面清扫保洁（双幅，不含桥涵、隧道，含边坡、碎落台、收费广场保洁）-高速公路-交通量≥3万辆路段（京港澳、沪昆）");
+
+                                DeaseItem projectBean2 = new DeaseItem();
+                                projectBean2.setId(1);
+                                projectBean2.setDTypeID("68B8FE4D-B643-475F-993C-617C65AB6CC2");
+                                projectBean2.setDTypeName("交通量＜3万辆路段");
+                                projectBean2.setDTypeNumber("A301-01-02");//项目代号
+                                projectBean2.setDTypeUnit("km·年");
+                                projectBean2.setDFullTypeName("路面清扫保洁（双幅，不含桥涵、隧道，含边坡、碎落台、收费广场保洁）-高速公路-交通量≥3万辆路段（京港澳、沪昆）-交通量＜3万辆路段");
+
+                                items.add(projectBean);
+                                items.add(projectBean2);
+                                item1Adapter = new Item1Adapter(
+                                        getApplicationContext(), items);
+                                nameSpinner.setAdapter(item1Adapter);
                             }
                         }
                     }
@@ -181,123 +203,22 @@ public class DiseaseSubActivity extends Activity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                Log.e("RoadTools_onError", error.getMessage());
             }
         }));
     }
 
-    /**
-     * 静态数据
-     */
-    private void makeData() {
-        mDataList.clear();
-        // 根组
-        UserBean bean = new UserBean(0x01, TreeNode.ROOT_PARENT_ID, true, "第1组");
-        mDataList.add(bean);
-        bean = new UserBean(0x02, TreeNode.ROOT_PARENT_ID, true, "第2组");
-        mDataList.add(bean);
-        bean = new UserBean(0x03, TreeNode.ROOT_PARENT_ID, true, "第3组");
-        mDataList.add(bean);
-        bean = new UserBean(0x04, TreeNode.ROOT_PARENT_ID, true, "第4组");
-        mDataList.add(bean);
-        bean = new UserBean(0x05, TreeNode.ROOT_PARENT_ID, true, "第5组");
-        mDataList.add(bean);
-        bean = new UserBean(0x06, TreeNode.ROOT_PARENT_ID, true, "第6组");
-        mDataList.add(bean);
-
-        // ////////////////////////////
-        // 第1组
-        bean = new UserBean(0x11, 0x01, true, "1组_1");
-        mDataList.add(bean);
-        bean = new UserBean(0x12, 0x01, true, "1组_2");
-        mDataList.add(bean);
-
-        // ////////////////////////////
-        // 1组_1
-        bean = new UserBean(0x111, 0x11, false, "卡卡西");
-        mDataList.add(bean);
-        bean = new UserBean(0x112, 0x11, false, "白牙");
-        mDataList.add(bean);
-        bean = new UserBean(0x113, 0x11, true, "1组_1_1");
-        mDataList.add(bean);
-
-        // ////////////////////////////
-        // 1组_1_1
-        bean = new UserBean(0x1131, 0x113, false, "九尾妖狐");
-        mDataList.add(bean);
-
-        // ////////////////////////////
-        // 1组_2
-        bean = new UserBean(0x1211, 0x12, false, "波风水门");
-        mDataList.add(bean);
-
-        // ////////////////////////////
-        // 第2组
-        bean = new UserBean(0x21, 0x02, true, "2组_1");
-        mDataList.add(bean);
-        bean = new UserBean(0x22, 0x02, false, "鸣人");
-        mDataList.add(bean);
-        bean = new UserBean(0x23, 0x02, false, "佐助");
-        mDataList.add(bean);
-
-        // ////////////////////////////
-        // 2组_1
-        bean = new UserBean(0x211, 0x21, false, "我爱罗");
-        mDataList.add(bean);
-
-        // ////////////////////////////
-        // 第3组
-        bean = new UserBean(0x31, 0x03, false, "大蛇丸");
-        mDataList.add(bean);
-        bean = new UserBean(0x32, 0x03, false, "自来也");
-        mDataList.add(bean);
-        bean = new UserBean(0x33, 0x03, false, "纲手");
-        mDataList.add(bean);
-
-        // ////////////////////////////
-        // 第5组
-        bean = new UserBean(0x51, 0x05, true, "5组_1");
-        mDataList.add(bean);
-        bean = new UserBean(0x52, 0x05, false, "君麻吕");
-        mDataList.add(bean);
-
-        // ////////////////////////////
-        // 5组_1
-        bean = new UserBean(0x511, 0x51, true, "5组_1_1");
-        mDataList.add(bean);
-        bean = new UserBean(0x512, 0x51, false, "春野樱");
-        mDataList.add(bean);
-
-        // ////////////////////////////
-        // 5组_1_1
-        bean = new UserBean(0x5111, 0x511, true, "5组_1_1_1");
-        mDataList.add(bean);
-        bean = new UserBean(0x5112, 0x511, false, "鹿丸");
-        mDataList.add(bean);
-
-        // ////////////////////////////
-        // 5组_1_1_1
-        bean = new UserBean(0x51111, 0x5111, true, "5组_1_1_1_1");
-        mDataList.add(bean);
-        bean = new UserBean(0x51112, 0x5111, false, "柱间");
-        mDataList.add(bean);
-
-        // ////////////////////////////
-        // 5组_1_1_1_1
-        bean = new UserBean(0x511111, 0x51111, false, "宇智波鼬");
-        mDataList.add(bean);
-        bean = new UserBean(0x511112, 0x51111, false, "迪达拉");
-        mDataList.add(bean);
-        bean = new UserBean(0x511113, 0x51111, false, "佩恩");
-        mDataList.add(bean);
-        bean = new UserBean(0x511114, 0x51111, false, "阿飞");
-        mDataList.add(bean);
-        bean = new UserBean(0x511115, 0x51111, false, "黑绝");
-        mDataList.add(bean);
-
-    }
-
     private ProgressDialog progress;
 
+    /**
+     * 增加病害维修项目
+     * http://58.20.182.212:89/yhapp/API/API.aspx?Action=SAddSDisease&UserID=3cd1cd06-3d77-4efb-a78d-ad9a9cea3d80
+     * &Key=d56a519d-f0e8-4db4-89b1-63aca0ac3c1f
+     * &DTypeID=3B7A5704-945E-4F51-B191-63B758FBEA88
+     * &Engineering=1111
+     * &LMTypeID=null
+     * &LMTypeName=null
+     */
     private class PatrolAsyn extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
@@ -312,7 +233,7 @@ public class DiseaseSubActivity extends Activity {
             try {
                 String url = new URLUtils()
                         .getInitData(getApplicationContext())
-                        + "Action=AddSDisease"
+                        + "Action=SAddSDisease"
                         + "&UserID="
                         + UserID
                         + "&Key="
@@ -320,7 +241,11 @@ public class DiseaseSubActivity extends Activity {
                         + "&DTypeID="
                         + DTypeID
                         + "&Engineering="
-                        + DiseLocationName;
+                        + (TextUtils.isEmpty(mProjectNumber) ? 0 : mProjectNumber)
+                        + "&LMTypeID="
+                        + LMTypeID
+                        + "&LMTypeName="
+                        + LMTypeName;
 
                 url = url.replaceAll(" ", "%20");
                 String json = NetworkTool.getContentForUTFGet(url);
@@ -329,7 +254,7 @@ public class DiseaseSubActivity extends Activity {
                 JSONObject jsonObject = new JSONObject(json);
                 boolean success = jsonObject.getBoolean("success");
                 if (success) {
-                    RepairProjectBean item = new RepairProjectBean();
+                    DeaseItem item = new DeaseItem();
                     item.setDTypeID(DTypeID);
                     item.setDTypeName(DTypeName);
                     item.setDTypeNumber(DTypeNumber);
@@ -350,10 +275,13 @@ public class DiseaseSubActivity extends Activity {
         protected void onPostExecute(String result) {
             progress.dismiss();
             if (result.equals("1")) {
-                itemAdapter = new ItemAdapter(getApplicationContext(), items1);
-                listView.setAdapter(itemAdapter);
+//                itemAdapter = new ItemAdapter(getApplicationContext(), items1);
+//                listView.setAdapter(itemAdapter);
+                //添加成功回到病害信息主界面
                 Toast.makeText(getApplicationContext(), "添加成功",
                         Toast.LENGTH_LONG).show();
+                setResult(RESULT_OK);
+                finish();
             } else {
                 Toast.makeText(getApplicationContext(), result,
                         Toast.LENGTH_LONG).show();

@@ -84,7 +84,7 @@
                 android:paddingBottom="0dp"
                 android:textColor="#666666"
                 android:paddingLeft="5dp"
-                android:text="水沟、暗沟清理"
+                android:text=""
                 android:gravity="center_vertical"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -92,7 +92,8 @@
         <!--项目名称-->
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="40dip"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp"
             android:background="#e8e8e8"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
@@ -108,10 +109,19 @@
                 android:textColor="#666666"
                 android:textSize="14sp"/>
 
-            <TextView
+            <!--<TextView-->
+            <!--android:id="@+id/item_spinner"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="fill_parent"-->
+            <!--android:background="@drawable/spinner_background_holo_light"-->
+            <!--android:paddingBottom="0dp"-->
+            <!--android:textColor="#000000"-->
+            <!--android:textSize="14sp"/>-->
+
+            <Spinner
                 android:id="@+id/item_spinner"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/spinner_background_holo_light"
                 android:paddingBottom="0dp"
                 android:textColor="#000000"
@@ -142,7 +152,7 @@
                 android:layout_height="fill_parent"
                 android:textColor="#666666"
                 android:paddingLeft="5dp"
-                android:text="A201-01-01"
+                android:text=""
                 android:gravity="center_vertical|left"
                 android:textSize="14sp"/>
         </LinearLayout>
@@ -159,7 +169,7 @@
                 android:background="@drawable/numberpicker_input_disabled"
                 android:gravity="center_vertical|left"
                 android:paddingLeft="5dp"
-                android:text="工程量"
+                android:text="工程数量"
                 android:textColor="#666666"
                 android:textSize="14sp" />
 
@@ -182,6 +192,7 @@
                     android:text="＋"/>
 
                 <EditText
+                    android:id="@+id/et_project_number"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toLeftOf="@+id/btn_add"
@@ -210,7 +221,7 @@
                 android:background="@drawable/numberpicker_input_disabled"
                 android:gravity="center_vertical|left"
                 android:paddingLeft="5dp"
-                android:text="单位"
+                android:text="项目单位"
                 android:textColor="#666666"
                 android:textSize="14sp" />
 
@@ -220,7 +231,7 @@
                 android:layout_height="fill_parent"
                 android:textColor="#666666"
                 android:paddingLeft="5dp"
-                android:text="km.年"
+                android:text=""
                 android:gravity="center_vertical|left"
                 android:textSize="14sp" />
         </LinearLayout>
