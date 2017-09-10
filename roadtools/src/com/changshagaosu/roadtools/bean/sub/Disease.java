@@ -6,7 +6,17 @@ public class Disease {
 	private int id;
 	private String DictionaryName;
 	private List<DiseaseType> DiseaseType;
-	private String DictionaryCode;
+    private String DictionaryId;
+
+    @Override
+    public String toString() {
+        return "Disease{" +
+                "id=" + id +
+                ", DictionaryName='" + DictionaryName + '\'' +
+                ", DiseaseType=" + DiseaseType +
+                ", DictionaryId='" + DictionaryId + '\'' +
+                '}';
+    }
 
 	public int getId() {
 		return id;
@@ -32,13 +42,13 @@ public class Disease {
 		this.DiseaseType = DiseaseType;
 	}
 
-	public String getDictionaryCode() {
-		return DictionaryCode;
-	}
+    public String getDictionaryId() {
+        return DictionaryId;
+    }
 
-	public void setDictionaryCode(String DictionaryCode) {
-		this.DictionaryCode = DictionaryCode;
-	}
+    public void setDictionaryId(String DictionaryCode) {
+        this.DictionaryId = DictionaryCode;
+    }
 
 	public static class Data {
 		private List<Disease> Disease;
@@ -76,10 +86,21 @@ public class Disease {
 
 	public static class DiseaseType {
 		private String DictionaryName;
-		private String DictionaryCode;
-		private String CommonTypeID;
+        private String DictionaryId;
+        private String CommonTypeID;
 		private String CommonTypeName;
 		private int id;
+
+        @Override
+        public String toString() {
+            return "DiseaseType{" +
+                    "DictionaryName='" + DictionaryName + '\'' +
+                    ", DictionaryId='" + DictionaryId + '\'' +
+                    ", CommonTypeID='" + CommonTypeID + '\'' +
+                    ", CommonTypeName='" + CommonTypeName + '\'' +
+                    ", id=" + id +
+                    '}';
+        }
 
 		public int getId() {
 			return id;
@@ -113,13 +134,13 @@ public class Disease {
 			DictionaryName = dictionaryName;
 		}
 
-		public String getDictionaryCode() {
-			return DictionaryCode;
-		}
+        public String getDictionaryId() {
+            return DictionaryId;
+        }
 
-		public void setDictionaryCode(String dictionaryCode) {
-			DictionaryCode = dictionaryCode;
-		}
+        public void setDictionaryId(String dictionaryId) {
+            DictionaryId = dictionaryId;
+        }
 
 	}
 }

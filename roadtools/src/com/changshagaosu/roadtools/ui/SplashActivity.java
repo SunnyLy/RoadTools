@@ -130,8 +130,8 @@ public class SplashActivity extends Activity {
 				for (Disease disease : lines) {
 					db.save(disease);
 					for(Disease.DiseaseType diseaseType:disease.getDiseaseType()){
-						diseaseType.setDictionaryCode(disease.getDictionaryCode());
-						diseaseType.setDictionaryName(disease.getDictionaryName());
+                        diseaseType.setDictionaryId(disease.getDictionaryId());
+                        diseaseType.setDictionaryName(disease.getDictionaryName());
 						db.save(diseaseType);
 					}
 				}

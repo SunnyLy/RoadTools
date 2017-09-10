@@ -178,7 +178,7 @@ public class DiseaseActivity extends Activity {
 			diseTypeAdapter = new N_DiseTypeAdapter(getApplicationContext(),
 					diseases);
 			diseTypeNameSpinner.setAdapter(diseTypeAdapter);
-			DiseType = diseases.get(0).getDictionaryCode();
+			DiseType = diseases.get(0).getDictionaryId();
 			DiseTypeName = diseases.get(0).getDictionaryName();
 
 			diseaseTypes = db.findAllByWhere(Disease.DiseaseType.class,
@@ -220,32 +220,39 @@ public class DiseaseActivity extends Activity {
 					public void onNothingSelected(AdapterView<?> arg0) {
 					}
 				});
+
+		//病害类别
 		diseTypeNameSpinner
 				.setOnItemSelectedListener(new OnItemSelectedListener() {
 					@Override
 					public void onItemSelected(AdapterView<?> arg0, View arg1,
 											   int arg2, long arg3) {
 
-						DiseType = diseases.get(arg2).getDictionaryCode();
+						DiseType = diseases.get(arg2).getDictionaryId() + "";
 						DiseTypeName = diseases.get(arg2).getDictionaryName();
 
 						diseaseTypes = db.findAllByWhere(
 								Disease.DiseaseType.class, "DictionaryName='"
 										+ DiseTypeName + "'");
 						if (!diseaseTypes.isEmpty()) {
+							Log.e("RoadTools", "diseaseTypes列表:" + diseaseTypes.toString());
 							diseLMTypeAdapter = new N_DiseLMTypeAdapter(
 									getApplicationContext(), diseaseTypes);
 							diseLMTypeNameSpinner.setAdapter(diseLMTypeAdapter);
+							//当切换病害类别时，病害类型默认选中第0个
 							DiseLMTypeName = diseaseTypes.get(0)
 									.getCommonTypeName();
 							DiseLMType = diseaseTypes.get(0).getCommonTypeID();
+							Log.e("RoadTools", "DiseaseType:" + DiseLMType);
 						}
+						Log.e("RoadTools", "Disease:" + diseases.get(arg2).toString());
 					}
 
 					@Override
 					public void onNothingSelected(AdapterView<?> arg0) {
 					}
 				});
+		//病害类型
 		diseLMTypeNameSpinner
 				.setOnItemSelectedListener(new OnItemSelectedListener() {
 					@Override
@@ -254,6 +261,8 @@ public class DiseaseActivity extends Activity {
 						DiseLMTypeName = diseaseTypes.get(arg2)
 								.getCommonTypeName();
 						DiseLMType = diseaseTypes.get(arg2).getCommonTypeID();
+
+						Log.e("RoadTools", "病害类型:名称:" + DiseLMTypeName + ",ID:" + DiseLMType);
 					}
 
 					@Override
@@ -316,7 +325,7 @@ public class DiseaseActivity extends Activity {
 					intent.putExtra("DiseaseCode", DiseType);
 					intent.putExtra("DiseLocationName", DiseLocationName);
 					intent.putExtra("DieaseTypeName", DiseLMTypeName);
-					intent.putExtra("DiseLMType", DiseLMType);//主表病害类型主键
+					intent.putExtra("DiseLMType", DiseLMType);//
 
 					startActivityForResult(intent, REQUEST_CODE);
 				} else {

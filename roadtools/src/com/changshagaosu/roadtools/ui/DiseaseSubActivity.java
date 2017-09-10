@@ -89,6 +89,7 @@ public class DiseaseSubActivity extends Activity {
             LMTypeName = intent.getStringExtra("DieaseTypeName");
             LMTypeID = intent.getStringExtra("DiseLMType");
             mDeaseTypeName.setText(LMTypeName);
+            Log.e("RoadTools", "传过来的DiseaseCode:" + DiseaseCode);
         }
 
         loadData();
@@ -149,21 +150,11 @@ public class DiseaseSubActivity extends Activity {
      * 加载病害维修项目的数据
      */
     private void loadData() {
-        Key = "d56a519d-f0e8-4db4-89b1-63aca0ac3c1f";
-        DiseaseCode = "B600";
-
-        /**
-         * http://58.20.182.212:89/yhapp/API/API.aspx?Action=SDiseaseItem&Key=314a9d3f-305d-4f2e-abb8-5b4e2ca4a288
-         * &DiseaseCode=A200
-         *
-         * http://58.20.182.212:89/yhapp/API/API.aspx?Action=DiseaseItem&Key=d56a519d-f0e8-4db4-89b1-63aca0ac3c1f
-         * &DiseaseCode=B600
-         */
+//      http://58.20.182.212:89/yhapp/API/API.aspx?Action=SDiseaseItem&DiseaseCode=2ad4c62a-2308-492e-a266-f70ed7608772
 
         executeRequest(new com.changshagaosu.roadtools.json.GsonRequest<>(
                 new URLUtils().getInitData(getApplicationContext())
                         + "Action=SDiseaseItem&" +
-                        "Key=" + Key + "&" +
                         "DiseaseCode=" + DiseaseCode,
                 DeaseItem.RequestData.class, null,
                 new Response.Listener<DeaseItem.RequestData>() {
