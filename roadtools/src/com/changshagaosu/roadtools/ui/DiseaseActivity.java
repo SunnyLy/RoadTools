@@ -404,6 +404,8 @@ public class DiseaseActivity extends Activity {
 	 * 获取病害项目列表
 	 */
 	private void getDeaseItems() {
+		//http://58.20.182.212:89/yhapp/API/API.aspx?Action=SDiseaseList&
+		// Key=ae7e6d1e-58c2-44b7-ba21-588854ff9d61
 		RequestManager.addRequest(new com.changshagaosu.roadtools.json.GsonRequest<>(
 				new URLUtils().getInitData(getApplicationContext())
 						+ "Action=SDiseaseList&"
@@ -415,10 +417,12 @@ public class DiseaseActivity extends Activity {
 						if (response != null && response.isSuccess()) {
 							DeaseProjectBean.Data data = response.getData();
 							if (data != null) {
-								mDeaseProjectLists = data.getDiseaseItem();
-								if (mDeaseProjectLists != null && mDeaseProjectLists.size() > 0) {
+								List<DeaseProjectBean> datas = data.getSDiseaseList();
+								if (datas != null && datas.size() > 0) {
 									mLLDeaseProj.setVisibility(View.VISIBLE);
-									Log.e("RoadTools_Success", mDeaseProjectLists.toString());
+									Log.e("RoadTools_Success", datas.toString());
+									mDeaseProjectLists.clear();
+									mDeaseProjectLists.addAll(datas);
 									mDeaseProjAdapter.notifyDataSetChanged();
 								}
 							}

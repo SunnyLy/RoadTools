@@ -7,7 +7,7 @@ import java.util.List;
  * 病害项目Bean
  */
 public class DeaseProjectBean implements Serializable {
-    private int ItemID;//病害项目主键
+    private String ItemID;//病害项目主键
     private String ItemCode; //病害项目代号
     private String ItemName; //病害项目名称
     private String Engineering; //预计工程量
@@ -63,12 +63,11 @@ public class DeaseProjectBean implements Serializable {
         TotalMoney = totalMoney;
     }
 
-    public int getItemID() {
-
+    public String getItemID() {
         return ItemID;
     }
 
-    public void setItemID(int itemID) {
+    public void setItemID(String itemID) {
         ItemID = itemID;
     }
 
@@ -86,14 +85,14 @@ public class DeaseProjectBean implements Serializable {
     }
 
     public static class Data {
-        private List<DeaseProjectBean> DiseaseItem;
+        private List<DeaseProjectBean> SDiseaseList;
 
-        public List<DeaseProjectBean> getDiseaseItem() {
-            return DiseaseItem;
+        public List<DeaseProjectBean> getSDiseaseList() {
+            return SDiseaseList;
         }
 
-        public void setDiseaseItem(List<DeaseProjectBean> diseaseItem) {
-            DiseaseItem = diseaseItem;
+        public void setSDiseaseList(List<DeaseProjectBean> SDiseaseList) {
+            this.SDiseaseList = SDiseaseList;
         }
 
     }

@@ -51,7 +51,7 @@ public class DeaseProjectItemAdapter extends BaseAdapter {
             TextView deaseUnit = (TextView) convertView.findViewById(R.id.tv_dease_unit);
             TextView deaseProjNumber = (TextView) convertView.findViewById(R.id.tv_dease_project_number);
             TextView deaseId = (TextView) convertView.findViewById(R.id.deaseId);
-            deaseId.setText(projectBean.getItemID() + "");
+            deaseId.setText((position + 1) + "");
             deaseTypeNumber.setText(projectBean.getItemCode());
             deaseProjName.setText(projectBean.getItemName());
             deaseUnit.setText(projectBean.getItemUnit());
