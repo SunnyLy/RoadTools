@@ -1,7 +1,6 @@
 package com.changshagaosu.roadtools.ui;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
@@ -20,7 +19,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -37,6 +35,7 @@ import com.changshagaosu.roadtools.adapter.DeaseProjectItemAdapter;
 import com.changshagaosu.roadtools.adapter.N_DiseLMTypeAdapter;
 import com.changshagaosu.roadtools.adapter.N_DiseLocationAdapter;
 import com.changshagaosu.roadtools.adapter.N_DiseTypeAdapter;
+import com.changshagaosu.roadtools.base.BaseActivity;
 import com.changshagaosu.roadtools.bean.DeaseProjectBean;
 import com.changshagaosu.roadtools.bean.sub.Disease;
 import com.changshagaosu.roadtools.bean.sub.RoadLine;
@@ -64,7 +63,7 @@ import java.util.Map;
  * 危害上报
  */
 @SuppressLint("SimpleDateFormat")
-public class DiseaseActivity extends Activity {
+public class DiseaseActivity extends BaseActivity {
 	private String UserID;
 	private String LineID;
 	private String LineName;
@@ -122,12 +121,22 @@ public class DiseaseActivity extends Activity {
 		super.onConfigurationChanged(config);
 	}
 
+//	@Override
+//	protected void onCreate(Bundle savedInstanceState) {
+//		super.onCreate(savedInstanceState);
+//		getWindow().setSoftInputMode(
+//				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+//		setContentView(R.layout.activity_disease);
+//
+//	}
+
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		getWindow().setSoftInputMode(
-				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-		setContentView(R.layout.activity_disease);
+	protected int getLayoutId() {
+		return R.layout.activity_disease;
+	}
+
+	@Override
+	public void initParams() {
 		SourceID = getIntent().getStringExtra("CheckDailyRecordID");
 		mDeaseProjectLists.clear();
 		mDeaseProjAdapter = new DeaseProjectItemAdapter(this, mDeaseProjectLists);
@@ -391,6 +400,7 @@ public class DiseaseActivity extends Activity {
 				case 0x101:
 				case REQUEST_CODE:
 					//添加病害维修项目成功
+					showLoading(R.string.comm_loading);
 					getDeaseItems();
 
 					break;
@@ -415,6 +425,7 @@ public class DiseaseActivity extends Activity {
 					@Override
 					public void onResponse(DeaseProjectBean.RequestData response) {
 						if (response != null && response.isSuccess()) {
+							hideLoading();
 							DeaseProjectBean.Data data = response.getData();
 							if (data != null) {
 								List<DeaseProjectBean> datas = data.getSDiseaseList();
@@ -435,6 +446,7 @@ public class DiseaseActivity extends Activity {
 			public void onErrorResponse(VolleyError error) {
 
 				mLLDeaseProj.setVisibility(View.GONE);
+				hideLoading();
 				Log.e("RoadTools_onError", error.getMessage());
 			}
 		}), this);

@@ -34,4 +34,5 @@
     <string name="upload_success">上报成功</string>
     <string name="upload_failure">上报失败</string>
     <string name="select_project">病害类型或项目名称不能为空</string>
+    <string name="comm_loading">加载中,请稍候……</string>
 </resources>
