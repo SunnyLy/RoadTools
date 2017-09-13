@@ -1,5 +1,6 @@
 package com.changshagaosu.roadtools.ui;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -40,10 +42,13 @@ import com.changshagaosu.roadtools.bean.DeaseProjectBean;
 import com.changshagaosu.roadtools.bean.sub.Disease;
 import com.changshagaosu.roadtools.bean.sub.RoadLine;
 import com.changshagaosu.roadtools.json.RequestManager;
+import com.changshagaosu.roadtools.permission.PermissionActivity;
+import com.changshagaosu.roadtools.permission.PermissionManager;
 import com.changshagaosu.roadtools.preference.BasePreference;
 import com.changshagaosu.roadtools.preference.LoginPreference;
 import com.changshagaosu.roadtools.ui.view.RoadListView;
 import com.changshagaosu.roadtools.utils.NetworkTool;
+import com.changshagaosu.roadtools.utils.ToastUtils;
 import com.nobcdz.upload.URLUtils;
 import com.nobcdz.upload.UploadImageService;
 
@@ -114,7 +119,14 @@ public class DiseaseActivity extends BaseActivity {
 	private DeaseProjectItemAdapter mDeaseProjAdapter;
 	private RoadListView mLvDeaseItem;
 
+	private Button mBtnUpload;
+	private boolean uploadSuccess = false;
+
 	private LinearLayout mLLDeaseProj;
+	//android6.0以上的危险权限
+	private String[] mPermissions = new String[]{Manifest.permission.CAMERA};
+	private PermissionManager mPermissionManager;
+	private final int PERMISSION_REQUEST_CODE = 0x101;
 
 	@Override
 	public void onConfigurationChanged(Configuration config) {
@@ -136,7 +148,14 @@ public class DiseaseActivity extends BaseActivity {
 	}
 
 	@Override
+	public void onContentChanged() {
+		mBtnUpload = (Button) findViewById(R.id.disease_btn);
+		mBtnUpload.setClickable(true);
+	}
+
+	@Override
 	public void initParams() {
+		mPermissionManager = new PermissionManager(this);
 		SourceID = getIntent().getStringExtra("CheckDailyRecordID");
 		mDeaseProjectLists.clear();
 		mDeaseProjAdapter = new DeaseProjectItemAdapter(this, mDeaseProjectLists);
@@ -162,6 +181,20 @@ public class DiseaseActivity extends BaseActivity {
 		});
 		init();
 		initListener();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (mPermissionManager.lacksPermissions(mPermissions)) {
+			startPermissionsActivity();
+		}
+	}
+
+	//进入权限设置界面
+	private void startPermissionsActivity() {
+
+		PermissionActivity.startActivityForResult(this, PERMISSION_REQUEST_CODE, mPermissions);
 	}
 
 	private void init() {
@@ -317,7 +350,11 @@ public class DiseaseActivity extends BaseActivity {
 	public void mOnClick(View view) {
 		switch (view.getId()) {
 			case R.id.disease_btn:
-				dialog();
+				if (!uploadSuccess) {
+					dialog();
+				} else {
+					ToastUtils.showShort(mContext, R.string.donot_reupload);
+				}
 				break;
 			case R.id.take_btn:
 				if (Key != null) {
@@ -407,6 +444,8 @@ public class DiseaseActivity extends BaseActivity {
 				default:
 					break;
 			}
+		} else if (requestCode == REQUEST_CODE && resultCode == PermissionActivity.PERMISSIONS_DENIED) {
+			finish();
 		}
 	}
 
@@ -567,10 +606,12 @@ public class DiseaseActivity extends BaseActivity {
 		protected void onPostExecute(String result) {
 			progress.dismiss();
 			if (result.equals("1")) {
+				uploadSuccess = true;
 				infoTextView.setText("可以拍照了");
 				Toast.makeText(getApplicationContext(), "保存成功",
 						Toast.LENGTH_LONG).show();
 			} else {
+				uploadSuccess = false;
 				Toast.makeText(getApplicationContext(), result,
 						Toast.LENGTH_LONG).show();
 			}

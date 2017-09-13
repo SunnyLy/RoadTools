@@ -3,10 +3,10 @@ ext {
 
     //android版本
     android_version = [
-            versionCode: 14,
-            versionName: '1.4',
+            versionCode      : 15,
+            versionName      : '1.4',
             versionNameSuffix: '_10',
-            appName    : 'RoadTools',
-            channel    : 'HuNan',
+            appName          : 'RoadTools',
+            channel          : 'HuNan',
     ]
 }

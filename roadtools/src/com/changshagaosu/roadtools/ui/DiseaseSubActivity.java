@@ -127,7 +127,7 @@ public class DiseaseSubActivity extends Activity {
         switch (view.getId()) {
             case R.id.start_btn:
                 mProjectNumber = mETProjectNumber.getText().toString().trim();
-                if (TextUtils.isEmpty(Key) || TextUtils.isEmpty(LMTypeName) || TextUtils.isEmpty(DTypeName)) {
+                if (TextUtils.isEmpty(Key) || TextUtils.isEmpty(DTypeName)) {
                     ToastUtils.showShort(DiseaseSubActivity.this, R.string.select_project);
                     return;
                 }
@@ -167,30 +167,6 @@ public class DiseaseSubActivity extends Activity {
                                 item1Adapter = new Item1Adapter(
                                         getApplicationContext(), items);
                                 nameSpinner.setAdapter(item1Adapter);
-                            } else {
-
-//                                items = new ArrayList<>();
-//                                DeaseItem projectBean = new DeaseItem();
-//                                projectBean.setId(1);
-//                                projectBean.setDTypeID("3B7A5704-945E-4F51-B191-63B758FBEA88");
-//                                projectBean.setDTypeName("交通量≥3万辆路段（京港澳、沪昆）");
-//                                projectBean.setDTypeNumber("A301-01-01");//项目代号
-//                                projectBean.setDTypeUnit("km·年");
-//                                projectBean.setDFullTypeName("路面清扫保洁（双幅，不含桥涵、隧道，含边坡、碎落台、收费广场保洁）-高速公路-交通量≥3万辆路段（京港澳、沪昆）");
-//
-//                                DeaseItem projectBean2 = new DeaseItem();
-//                                projectBean2.setId(1);
-//                                projectBean2.setDTypeID("68B8FE4D-B643-475F-993C-617C65AB6CC2");
-//                                projectBean2.setDTypeName("交通量＜3万辆路段");
-//                                projectBean2.setDTypeNumber("A301-01-02");//项目代号
-//                                projectBean2.setDTypeUnit("km·年");
-//                                projectBean2.setDFullTypeName("路面清扫保洁（双幅，不含桥涵、隧道，含边坡、碎落台、收费广场保洁）-高速公路-交通量≥3万辆路段（京港澳、沪昆）-交通量＜3万辆路段");
-//
-//                                items.add(projectBean);
-//                                items.add(projectBean2);
-//                                item1Adapter = new Item1Adapter(
-//                                        getApplicationContext(), items);
-//                                nameSpinner.setAdapter(item1Adapter);
                             }
                         }
                     }

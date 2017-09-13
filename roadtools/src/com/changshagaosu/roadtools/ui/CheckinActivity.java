@@ -1,5 +1,6 @@
 package com.changshagaosu.roadtools.ui;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -26,6 +27,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.changshagaosu.roadtools.R;
+import com.changshagaosu.roadtools.permission.PermissionActivity;
+import com.changshagaosu.roadtools.permission.PermissionManager;
 import com.changshagaosu.roadtools.preference.LoginPreference;
 import com.changshagaosu.roadtools.utils.GPSUtil;
 import com.changshagaosu.roadtools.utils.NetworkTool;
@@ -62,6 +65,10 @@ public class CheckinActivity extends Activity {
 	BroadcastReceiver broadcastReceiver;
 	String Key;
 	int hours;
+	//android6.0以上的危险权限
+	private String[] mPermissions = new String[]{Manifest.permission.CAMERA};
+	private PermissionManager mPermissionManager;
+	private final int REQUEST_CODE = 0x100;
 
 	@Override
 	public void onConfigurationChanged(Configuration config) {
@@ -74,6 +81,7 @@ public class CheckinActivity extends Activity {
 		getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.activity_checkin);
+		mPermissionManager = new PermissionManager(this);
 		checkdateTextView = (TextView) findViewById(R.id.CheckDate_tv);
 		loctionTextView = (TextView) findViewById(R.id.loction_tv);
 		nameTextView = (TextView) findViewById(R.id.name_tv);
@@ -119,6 +127,18 @@ public class CheckinActivity extends Activity {
 		};
 		this.registerReceiver(broadcastReceiver, new IntentFilter(
 				"com.changshagaosu.roadtools.utils.GPSUtil"));
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (mPermissionManager.lacksPermissions(mPermissions)) {
+			startPermissionsActivity();
+		}
+	}
+
+	private void startPermissionsActivity() {
+		PermissionActivity.startActivityForResult(this, REQUEST_CODE, mPermissions);
 	}
 
 	public void mOnClick(View view) {
@@ -228,6 +248,8 @@ public class CheckinActivity extends Activity {
 			default:
 				break;
 			}
+		} else if (requestCode == REQUEST_CODE && resultCode == PermissionActivity.PERMISSIONS_DENIED) {
+			finish();
 		}
 	}
 
