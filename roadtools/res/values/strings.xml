@@ -25,7 +25,7 @@
 
     <string name="settings">设置</string>
     <string name="help">帮助</string>
-    <string name="string_help_text">当前应用缺少必要权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。\n\n最后点击两次后退按钮，即可返回。</string>
+    <string name="string_help_text">当前应用缺少****权限。\n\n请点击\"设置\"-\"权限\"-打开所需权限。\n\n最后点击两次后退按钮，即可返回。</string>
     <string name="quit">退出</string>
     <string name="delete_success">删除成功</string>
     <string name="delete_failure">删除失败</string>
@@ -36,4 +36,8 @@
     <string name="select_project">项目名称不能为空</string>
     <string name="comm_loading">加载中,请稍候……</string>
     <string name="donot_reupload">请勿重复上传</string>
+    <string name="perm_camera">相机</string>
+    <string name="perm_location">定位</string>
+    <string name="perm_call_phone">打电话</string>
+    <string name="perm_must">必要</string>
 </resources>

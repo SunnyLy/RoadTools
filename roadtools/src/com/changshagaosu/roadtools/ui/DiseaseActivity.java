@@ -184,11 +184,16 @@ public class DiseaseActivity extends BaseActivity {
 	}
 
 	@Override
-	protected void onResume() {
-		super.onResume();
+	protected void onStart() {
+		super.onStart();
 		if (mPermissionManager.lacksPermissions(mPermissions)) {
 			startPermissionsActivity();
 		}
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 	}
 
 	//进入权限设置界面
@@ -444,7 +449,7 @@ public class DiseaseActivity extends BaseActivity {
 				default:
 					break;
 			}
-		} else if (requestCode == REQUEST_CODE && resultCode == PermissionActivity.PERMISSIONS_DENIED) {
+		} else if (requestCode == PERMISSION_REQUEST_CODE && resultCode == PermissionActivity.PERMISSIONS_DENIED) {
 			finish();
 		}
 	}

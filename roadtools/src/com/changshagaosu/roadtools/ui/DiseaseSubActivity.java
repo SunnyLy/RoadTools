@@ -175,7 +175,7 @@ public class DiseaseSubActivity extends Activity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Log.e("RoadTools_onError", error.getMessage());
+                Log.e("RoadTools_onError", error == null ? "Volley请求错误" : error.getMessage());
             }
         }));
     }

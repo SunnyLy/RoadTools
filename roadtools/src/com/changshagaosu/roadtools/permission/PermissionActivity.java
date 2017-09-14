@@ -1,5 +1,6 @@
 package com.changshagaosu.roadtools.permission;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,8 +12,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 
 import com.changshagaosu.roadtools.R;
+import com.changshagaosu.roadtools.base.BaseActivity;
 
 /**
  * ------------------------------------------------
@@ -26,7 +29,7 @@ import com.changshagaosu.roadtools.R;
  * @Annotation
  */
 
-public class PermissionActivity extends Activity {
+public class PermissionActivity extends BaseActivity {
     public static final int PERMISSIONS_GRANTED = 0; // 权限授权
     public static final int PERMISSIONS_DENIED = 1; // 权限拒绝
 
@@ -39,24 +42,29 @@ public class PermissionActivity extends Activity {
     private boolean isRequireCheck; // 是否需要系统权限检测, 防止和系统提示框重叠
 
     // 启动当前权限页面的公开接口
-    public static void startActivityForResult(Activity activity, int requestCode, String... permissions) {
+    public static void startActivityForResult(@NonNull Activity activity, int requestCode, String... permissions) {
         Intent intent = new Intent(activity, PermissionActivity.class);
         intent.putExtra(EXTRA_PERMISSIONS, permissions);
         ActivityCompat.startActivityForResult(activity, intent, requestCode, null);
     }
 
-    @Override protected void onCreate(@Nullable Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getIntent() == null || !getIntent().hasExtra(EXTRA_PERMISSIONS)) {
             throw new RuntimeException("PermissionsActivity需要使用静态startActivityForResult方法启动!");
         }
-        setContentView(R.layout.activity_permissions);
-
         mChecker = new PermissionManager(this);
         isRequireCheck = true;
     }
 
-    @Override protected void onResume() {
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_permissions;
+    }
+
+    @Override
+    protected void onResume() {
         super.onResume();
         if (isRequireCheck) {
             String[] permissions = getPermissions();
@@ -118,20 +126,44 @@ public class PermissionActivity extends Activity {
 
     // 显示缺失权限提示
     private void showMissingPermissionDialog() {
+        String[] permissions = getPermissions();
+        StringBuilder strBuild = new StringBuilder();
+        if (permissions != null && permissions.length > 0) {
+            for (String perStr : permissions) {
+                switch (perStr) {
+                    case Manifest.permission.CAMERA:
+                        strBuild.append(getResources().getString(R.string.perm_camera));
+                        break;
+                    case Manifest.permission.ACCESS_FINE_LOCATION:
+                    case Manifest.permission.ACCESS_COARSE_LOCATION:
+                        strBuild.append("、");
+                        strBuild.append(getResources().getString(R.string.perm_location));
+                        break;
+                    case Manifest.permission.CALL_PHONE:
+                        strBuild.append("、");
+                        strBuild.append(getResources().getString(R.string.perm_call_phone));
+                        break;
+                }
+            }
+        }
+
+        String promptInfo = getResources().getString(R.string.string_help_text);
         AlertDialog.Builder builder = new AlertDialog.Builder(PermissionActivity.this);
         builder.setTitle(R.string.help);
-        builder.setMessage(R.string.string_help_text);
+        builder.setMessage(TextUtils.isEmpty(strBuild.toString()) ? promptInfo.replace("****", getResources().getString(R.string.perm_must)) : promptInfo.replace("****", strBuild.toString()));
 
         // 拒绝, 退出应用
         builder.setNegativeButton(R.string.quit, new DialogInterface.OnClickListener() {
-            @Override public void onClick(DialogInterface dialog, int which) {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
                 setResult(PERMISSIONS_DENIED);
                 finish();
             }
         });
 
         builder.setPositiveButton(R.string.settings, new DialogInterface.OnClickListener() {
-            @Override public void onClick(DialogInterface dialog, int which) {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
                 startAppSettings();
             }
         });

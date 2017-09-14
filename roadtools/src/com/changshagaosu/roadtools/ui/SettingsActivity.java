@@ -11,8 +11,10 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.changshagaosu.roadtools.BuildConfig;
 import com.changshagaosu.roadtools.R;
 import com.changshagaosu.roadtools.bean.RoadLine;
 import com.changshagaosu.roadtools.preference.LoginPreference;
@@ -26,6 +28,13 @@ public class SettingsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_setting);
 	}
+
+    @Override
+    public void onContentChanged() {
+        super.onContentChanged();
+        TextView tvVersion = (TextView) findViewById(R.id.bpm_tv);
+        tvVersion.setText(BuildConfig.VERSION_NAME);
+    }
 
 	public void mOnClick(View view) {
 		switch (view.getId()) {
