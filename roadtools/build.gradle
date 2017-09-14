@@ -8,7 +8,7 @@ android {
         ndk {
             abiFilters 'armeabi'
         }
-        applicationId "com.changshagaosu.roadtools.RoadToolsApplication"
+        applicationId "com.changshagaosu.roadtools"
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode android_version.versionCode
