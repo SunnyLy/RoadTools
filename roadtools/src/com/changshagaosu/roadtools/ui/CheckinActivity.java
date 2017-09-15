@@ -14,9 +14,11 @@ import android.graphics.BitmapFactory.Options;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -66,7 +68,8 @@ public class CheckinActivity extends Activity {
 	String Key;
 	int hours;
 	//android6.0以上的危险权限
-	private String[] mPermissions = new String[]{Manifest.permission.CAMERA};
+	private String[] mPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.ACCESS_COARSE_LOCATION,
+			Manifest.permission.ACCESS_FINE_LOCATION};
 	private PermissionManager mPermissionManager;
 	private final int REQUEST_CODE = 0x100;
 
@@ -287,8 +290,24 @@ public class CheckinActivity extends Activity {
 			imagePath.mkdirs();
 		}
 		imageFile = new File(imagePath + "/" + imageName);
-		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imageFile));
-		startActivityForResult(intent, 1);
+//		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imageFile));
+//		startActivityForResult(intent, 1);
+
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+			//Android7.0以下
+			Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+			intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imageFile));
+			startActivityForResult(intent, 1);
+		} else {
+			//Android7.0以上
+			if (!imageFile.getParentFile().exists()) imageFile.getParentFile().mkdirs();
+			Uri imageUri = FileProvider.getUriForFile(CheckinActivity.this, "com.changshagaosu.roadtools", imageFile);//通过FileProvider创建一个content类型的Uri
+			Intent intent = new Intent();
+			intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); //添加这一句表示对目标应用临时授权该Uri所代表的文件
+			intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE);//设置Action为拍照
+			intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);//将拍取的照片保存到指定URI
+			startActivityForResult(intent, 1);
+		}
 	}
 }
