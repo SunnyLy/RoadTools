@@ -5,7 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.AlertDialog;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +20,11 @@ import com.changshagaosu.roadtools.base.BaseActivity;
 import com.changshagaosu.roadtools.bean.CommonBean;
 import com.changshagaosu.roadtools.bean.DeaseProjectBean;
 import com.changshagaosu.roadtools.json.RequestManager;
+import com.changshagaosu.roadtools.utils.DecimalUtil;
 import com.changshagaosu.roadtools.utils.ToastUtils;
 import com.nobcdz.upload.URLUtils;
+
+import java.math.BigDecimal;
 
 /**
  * @Annotation <p>修改病害信息</p>
@@ -74,6 +79,7 @@ public class EditeDeaseActivity extends BaseActivity {
         mBtnMouse = (Button) findViewById(R.id.btn_edite_mouse);
         mBtnAdd = (Button) findViewById(R.id.btn_edite_add);
         mETProjectNumber = (EditText) findViewById(R.id.et_project_number);
+        mETProjectNumber.addTextChangedListener(mTextWatcher);
 
         setOnClickListeners(mBtnMouse, mBtnAdd);
     }
@@ -100,17 +106,20 @@ public class EditeDeaseActivity extends BaseActivity {
     private void operateProjNumber(boolean toAdd) {
 
         String projNumber = mETProjectNumber.getText().toString();
-        int num = Integer.parseInt(TextUtils.isEmpty(projNumber) ? "0" : projNumber);
+        BigDecimal bigDecimal = new BigDecimal(TextUtils.isEmpty(projNumber) ? "0" : projNumber);
+        BigDecimal operate = new BigDecimal("1.00");
+        BigDecimal result = null;
         if (toAdd) {
-            num++;
+            result = bigDecimal.add(operate);
         } else {
-            num--;
-            if (num <= 0) {
-                num = 0;
+            result = bigDecimal.subtract(operate);
+            if (result.floatValue() < 0) {
+                result = bigDecimal;
             }
         }
 
-        mETProjectNumber.setText(num + "");
+        mETProjectNumber.setText(result + "");
+        mETProjectNumber.setSelection(mETProjectNumber.getText().toString().trim().length());
     }
 
     @Override
@@ -137,6 +146,7 @@ public class EditeDeaseActivity extends BaseActivity {
         mTvProjectCode.setText(mProjectCode);
         mTvProjectUnit.setText(mProjectUnit);
         mETProjectNumber.setText(mEngienNumber);
+        mETProjectNumber.setSelection(mEngienNumber.length());
     }
 
     /**
@@ -241,4 +251,37 @@ public class EditeDeaseActivity extends BaseActivity {
         builder.create().show();
 
     }
+
+    private TextWatcher mTextWatcher = new TextWatcher() {
+
+        private int selectionStart;
+        private int selectionEnd;
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            selectionStart = mETProjectNumber.getSelectionStart();
+            selectionEnd = mETProjectNumber.getSelectionEnd();
+
+
+            if (!DecimalUtil.isOnlyPointNumber(mETProjectNumber.getText().toString(), 4) && s.length() > 0) {
+
+                //删除多余输入的字（不会显示出来）
+                s.delete(selectionStart - 1, selectionEnd);
+                mETProjectNumber.setText(s);
+                mETProjectNumber.setSelection(s.length());
+                ToastUtils.showShort(EditeDeaseActivity.this, R.string.toast_edit_number);
+            }
+
+        }
+    };
 }

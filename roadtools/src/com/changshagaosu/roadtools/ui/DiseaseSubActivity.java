@@ -5,7 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -28,12 +30,14 @@ import com.changshagaosu.roadtools.bean.UserBean;
 import com.changshagaosu.roadtools.json.RequestManager;
 import com.changshagaosu.roadtools.preference.LoginPreference;
 import com.changshagaosu.roadtools.ui.view.tree.TreeListView;
+import com.changshagaosu.roadtools.utils.DecimalUtil;
 import com.changshagaosu.roadtools.utils.NetworkTool;
 import com.changshagaosu.roadtools.utils.ToastUtils;
 import com.nobcdz.upload.URLUtils;
 
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +83,7 @@ public class DiseaseSubActivity extends Activity {
         mTvProjUnit = (TextView) findViewById(R.id.tv_unit);
         mDeaseTypeName = (TextView) findViewById(R.id.tv_deasename);
         mETProjectNumber = (EditText) findViewById(R.id.et_project_number);
+        mETProjectNumber.addTextChangedListener(mTextWatcher);
 
         UserID = LoginPreference.find().get("loginID");
         Intent intent = getIntent();
@@ -275,16 +280,52 @@ public class DiseaseSubActivity extends Activity {
     private void operateProjNumber(boolean toAdd) {
 
         String projNumber = mETProjectNumber.getText().toString();
-        int num = Integer.parseInt(TextUtils.isEmpty(projNumber) ? "0" : projNumber);
+        BigDecimal bigDecimal = new BigDecimal(TextUtils.isEmpty(projNumber) ? "0" : projNumber);
+        BigDecimal operate = new BigDecimal("1.00");
+        BigDecimal result = null;
         if (toAdd) {
-            num++;
+            result = bigDecimal.add(operate);
         } else {
-            num--;
-            if (num <= 0) {
-                num = 0;
+            result = bigDecimal.subtract(operate);
+            if (result.floatValue() < 0) {
+                result = bigDecimal;
             }
         }
 
-        mETProjectNumber.setText(num + "");
+        mETProjectNumber.setText(result + "");
+        mETProjectNumber.setSelection(mETProjectNumber.getText().toString().trim().length());
     }
+
+    private TextWatcher mTextWatcher = new TextWatcher() {
+
+        private int selectionStart;
+        private int selectionEnd;
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            selectionStart = mETProjectNumber.getSelectionStart();
+            selectionEnd = mETProjectNumber.getSelectionEnd();
+
+
+            if (!DecimalUtil.isOnlyPointNumber(mETProjectNumber.getText().toString(), 4) && s.length() > 0) {
+
+                //删除多余输入的字（不会显示出来）
+                s.delete(selectionStart - 1, selectionEnd);
+                mETProjectNumber.setText(s);
+                mETProjectNumber.setSelection(s.length());
+                ToastUtils.showShort(DiseaseSubActivity.this, R.string.toast_edit_number);
+            }
+
+        }
+    };
 }

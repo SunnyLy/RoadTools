@@ -40,4 +40,5 @@
     <string name="perm_location">定位</string>
     <string name="perm_call_phone">打电话</string>
     <string name="perm_must">必要</string>
+    <string name="toast_edit_number">只支持小数点后4位</string>
 </resources>
